@@ -25,28 +25,9 @@
 
 独立于销售流水线。用户的通用助手。
 
-## commit skill 检测缓存
+## 子项目清单（`.claude/` 超集关系）
 
-<!-- commit-skill: readme-standard = ok -->
-- README 中英双语 + LOGO + 徽章 + 版权署名：已就绪（2026-08-03 确认）
+本项目的 `.claude/` 是其子项目 `.claude/` 的权威源：本项目 `.claude/` 下除 `CLAUDE.md` 外的每个文件，在子项目 `.claude/` 下必须存在且逐字节一致；`CLAUDE.md` 内容同样覆盖到子项目（效果等价即可）。子项目内容变更后自动同步，无需询问。
 
-<!-- commit-skill: license = ok -->
-- LICENSE.md：已存在（2026-08-03 确认）
+- **xhqing**（`/Users/xhq/Documents/Projects/xhqing`）：用户的 GitHub 个人主页仓库（github.com/xhqing/xhqing，README 中英双语 + 拟人名 Kit 署名），已同步（2026-08-10）
 
-<!-- commit-skill: github-about = ok -->
-- GitHub About：已配置（中英双语 description + topics，2026-08-03）
-
-<!-- commit-skill: agent-persona = ok -->
-- Agent 拟人名：已写入 README（Kit，2026-08-03）
-
-<!-- commit-skill: attribution-name = ok -->
-- 版权人/署名引用名字：已归一为 All Contributors（2026-08-03 确认）
-
-<!-- commit-skill: readme-link-text = ok -->
-- 英文版 README 跳转中文版链接文字：已统一为「简体中文」（2026-08-03 确认）
-
-<!-- commit-skill: repo-sponsors = ok -->
-- 仓库 Sponsors 按钮：已就绪（xhqing/.github 全局默认 FUNDING.yml，2026-08-03 确认）
-
-<!-- commit-skill: readme-no-stars-badge = ok -->
-- README 徽章：已不含 GitHub Stars 数量徽章（2026-08-03 确认）
