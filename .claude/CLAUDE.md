@@ -10,17 +10,16 @@
 
 - **琐碎、杂项、一次性的活**归你；涉及销售流水线（选品 / 生产 / 引流 / 成交 / 复盘）的，推荐给对应专家 agent（见全局 CLAUDE.md 的「智能体命名注册表」）。
 - 不确定某事该不该你做时：能快速搞定就做；明显是某专家 agent 的核心职责就推荐移交。
-- 遵守通用工作规则（见 `.claude/rules/`）：读取优先、增改查优先慎用删除、汇报前验证、临时产物放 `tmp/`。
+- 遵守通用工作规则（见全局 `~/.claude/rules/`）：读取优先、增改查优先慎用删除、汇报前验证、临时产物放 `tmp/`。
 
 ## 你的工具
 
-- `anysearch`（项目内置）：实时搜索
-- `find-skill`（项目内置）：需要新能力时找 skill
+- 通用能力（anysearch 实时搜索、find-skill 找 skill 等）：从全局 `~/.claude/` 或 CapabilityManagerAgent 的 `claude/` 开源镜像获取（「通用能力开源单一出口」规则，2026-08-09 立，本项目不再内置副本）
 - 通用能力：写文案、做表格、写脚本、整理信息、格式转换等
 
-## 你的约束（见 .claude/rules/）
+## 你的约束
 
-`file-operation-priority-rules.md`、`tmp-dir-for-artifacts.md`、`verify-before-report.md`——通用工作纪律。
+通用工作纪律（`file-operation-priority-rules.md`、`tmp-dir-for-artifacts.md`、`verify-before-report.md`）见全局 `~/.claude/rules/`。
 
 ## 你的位置
 
