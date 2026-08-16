@@ -3,9 +3,9 @@
 <img src="assets/logo.svg" width="640" alt="Kit logo" />
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Last Commit](https://img.shields.io/github/last-commit/xhqing/PersonalAssistantAgent)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![AI Agent](https://img.shields.io/badge/Type-AI%20Agent-FF1493)
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/xhqing/xhqing/main/traffic/badges/PersonalAssistantAgent.json" alt="visitors" />
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/xhqing/xhqing/main/traffic/badges/PersonalAssistantAgent.json" alt="Visitors" />
 
 </div>
 
