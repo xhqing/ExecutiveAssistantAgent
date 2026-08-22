@@ -4,6 +4,29 @@
 
 ## [Unreleased]
 
+### 变更（P3 架构图五处措辞修订：Harness 口径 + 表述泛化）
+
+- **为什么改**：用户实看后提五项——①「双端点切换」改「多端点切换」（桥实际支持的不止两个端点，双端点是当前用法，表述泛化）；②「思考档位 max」改「思考档位调节」（标签说的是能力是可调，不是固定 max）；③「Claude Code 当操作界面」改「Claude Code 作为主力Harness」、④ 底部「Claude Code 界面不变」改「Claude Code Harness 不变」（对外口径统一用 Harness，与「界面」的日常含义区分）；⑤ 发布当天说明「桥的默认模型就从 5.2 切到 5.3，无缝切换」改第一人称陈述「我就把桥的默认模型从 5.2 切到了 5.3」（去掉宣传腔）。
+- **改了什么**：`tmp/xhs-glm53/p3-bridge.svg` 五处文本——副标「Claude Code 当操作界面」→「Claude Code 作为主力Harness」、右上胶囊「思考档位 max」→「思考档位调节」、右下胶囊「双端点切换」→「多端点切换」、说明卡小字「桥的默认模型就从 5.2 切到 5.3，无缝切换」→「我就把桥的默认模型从 5.2 切到了 5.3」、底部提示「Claude Code 界面不变」→「Claude Code Harness 不变」。Chrome headless 重渲染 PNG，视觉核验五处文字逐字正确、无溢出截断，左右四枚胶囊标签与其它文字无重叠。
+
+### 修复（TraeCode 换 JWT 仍 400：环境变量注入的代理绕过了 proxyMode，改配 VSCode `http.noProxy`）
+
+- **为什么改**：杀掉旧 ai-server 后重试登录，仍在最后一步 `refreshJwtToken error: 400`（明文 HTTP 撞代理）。深挖发现换 JWT 的请求不走 ai-server 的 TTNet 通道（新 server 日志 16 条全 `via_proxy:false` 却仍失败），而是扩展宿主（exthost）里另一条 axios 路径——它吃的是**进程环境变量** `HTTPS_PROXY`。而 exthost 进程环境里的 `HTTP_PROXY/HTTPS_PROXY=127.0.0.1:1087`、`NO_PROXY` 仅默认三项，来源不是 shell（VSCode 主进程由 launchd 启动、无这些变量），而是 **VSCode `http.proxySupport` 读系统代理后给扩展进程注入的环境变量**，注入时丢掉了系统 ExceptionsList 里的 `*.cn`。TraeCode 的 `trae.advanced.proxyMode` 只管 TTNet 通道，管不到这条 axios 路径；其捆绑 HTTP 栈会读 `no_proxy`/`NO_PROXY` 环境变量做豁免（解混淆确认）。验证闭环：curl 模拟「明文 POST 打代理端口 + Host 头」精确复现同款 400；`NO_PROXY` 覆盖 `api.trae.com.cn` 后同请求直连成功（到达 Trae API 网关返回业务层 JSON）。
+- **改了什么**：① `~/.zshrc` 的 `NO_PROXY` 追加 `.trae.com.cn,.trae.cn,.marscode.com,.marscode.cn,.byted.org,.zijieapi.com`（管终端启动的进程）；② VSCode 用户设置新增 `http.proxy: http://127.0.0.1:1087` + `http.noProxy: [.trae.com.cn, .trae.cn, .trae.ai, .marscode.com, .marscode.cn, .byted.org, .zijieapi.com]`（用户设置优先于系统代理，VSCode 按它给扩展进程注入环境变量，`.cn` 等豁免不再丢失）。需彻底重启 VSCode 使 exthost 拿到新环境变量。
+
+
+### 修复（TraeCode 登录走到「网页认证转圈」：后台 ai-server 子进程残留旧代理配置）
+
+- **为什么改**：上一条 no_proxy 修复后登录能跳转网页了，但网页端一直「认证中」转圈。排查插件日志发现授权流程其实走完了大半：`ExtensionUriHandler handleUri` → `login successfully`（已拿到 refresh_token），卡在最后一步「refresh_token 换 JWT」——`refreshJwtToken error: Request failed with status code 400`，响应头又见 `proxy-connection: keep-alive`（这个请求又走了代理），插件随即 `deleteAllInfo` 清掉登录信息判定失败，网页端等不到确认永远转圈。根因：发起该请求的不是插件本体，而是后台 ai-server 子进程（`aiServerMainV2.js` / `ai-agent` / `ckg_server`，23:18 启动）；这些进程在 VSCode reload window 后**不会重启**，插件只是重连旧 server，旧进程仍带着改配置前的 `system` 代理设置 → 明文 HTTPS 撞代理 400。
+- **改了什么**：杀掉 4 个旧 ai-server 后台进程（`kill` PID 1693/1707/1706/1705），插件自动以新配置重新拉起全新 server（23:47 启动，新 ckg 端口 52812）。验证新 `ai-agent` 日志：全部请求 `via_proxy:false`（16 条全直连）、10 成功 0 失败。经验教训：TraeCode 的 `trae.advanced.proxyMode` 改完后，仅 reload window 不够——后台 `~/.marscode` 的 ai-server 进程要一并杀掉重启才会应用新代理配置（也可彻底退出 VSCode 再重开）。
+
+
+### 修复（TraeCode VSCE 无法登录：插件走系统代理时 HTTPS 被明文转发）
+
+- **为什么改**：用户装好 TraeCode（marscode.marscode-extension v1.7.8，VS Code Marketplace）后点登录无反应。排查 `~/.marscode/logs/` 客户端日志，四个登录接口（api.trae.com.cn / api.marscode.com / 企业版 cn / 企业版 sg 的 `GetLoginGuidance`）全部报 `400 Bad Request — "The plain HTTP request was sent to HTTPS port" (Tengine)`。根因链：本机系统 HTTP/HTTPS 代理指向 `127.0.0.1:1087`（xray，ProxyToolkit）→ 插件 `trae.advanced.proxyMode` 默认 `system` 跟系统代理 → 插件的 TTNet 网络栈把 HTTPS 请求以明文 HTTP 发给代理（不走标准 CONNECT 隧道）→ 源站拒绝。旁证：curl 走同一代理用标准 CONNECT 是 200（xray 本身正常，是插件代理实现的缺陷）；绕过代理直连 cn 区接口也是 200（直连可用）。另：插件没有公开文档说明 proxyMode 取值，从 extension.js 解混淆得到取值为 `no_proxy` / `manual` / `system`。
+- **改了什么**：VSCode 用户设置（`~/Library/Application Support/Code/User/settings.json`）新增 `"trae.advanced.proxyMode": "no_proxy"`，让插件绕过系统代理直连（Trae 域名在国内直连可用，PAC 分流里本就走 DIRECT）。该文件是本机配置、不在任何 git 仓库，此处仅记录变更过程。
+
+
 ### 变更（P6 上手 3 步：仓库指引精确到 owner/repo + 舰队→团队）
 
 - **为什么改**：用户要求两处措辞修订——① 步骤 2 小字「GitHub 搜 CC-BRIDGE」指代不精确（GitHub 搜 CC-BRIDGE 会出一堆同名结果），改为「GitHub 搜 xhqing/CC-Bridge」精确到 owner/repo；② 底部关注引导「AI Agent 舰队连载」的「舰队」是内部叫法，改为「团队」对齐对外措辞统一（2026-08-16 起 fleet → team，与 P4 修订同批）。
