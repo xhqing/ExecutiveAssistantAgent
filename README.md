@@ -11,7 +11,7 @@
 
 # PersonalAssistantAgent · Kit
 
-> **Kit** — A general-purpose personal assistant. A pocket Swiss Army knife for the miscellaneous, one-off tasks that don't warrant a dedicated agent.
+> **Kit** — The owner's GM's assistant. Direct report to the owner, not part of any squad: hunts gigs on remote-work boards (eleduck & co.) on one end, and coordinates the miscellaneous one-off tasks that don't warrant a dedicated agent on the other. A pocket Swiss Army knife.
 
 [简体中文](README_cn.md)
 
@@ -19,7 +19,10 @@
 
 ## What it does
 
-Handles the odds and ends: research, organizing information, drafting emails and copy, spreadsheets, format conversion, small scripts, reminders, and answers to all kinds of questions. Anything that belongs to the sales pipeline (sourcing, production, marketing, closing, review) is referred to the specialist agents (Scout / Wright / Buzz / Vendy / Echo).
+Two jobs:
+
+- **Gig hunting (upstream of the task-pool bidding squad).** Finds and bids on AI-service gigs in remote-work communities. Conversion optimization belongs to Hopkins (BidOptimizerAgent); contracts and payments belong to Justin (LegalCounselAgent).
+- **General coordination.** Research, organizing information, drafting emails and copy, spreadsheets, format conversion, small scripts, reminders, and answers to all kinds of questions. Anything that belongs to the sales pipeline (sourcing, production, marketing, closing, review) is referred to the specialist agents (Scout / Wright / Buzz / Vendy / Echo).
 
 ## Built-in skills
 
