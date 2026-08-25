@@ -1,8 +1,18 @@
 # CHANGELOG
 
-本文件记录本项目（PersonalAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（当前版本条目待 VERSION 文件确定后对齐）。
+本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（当前版本条目待 VERSION 文件确定后对齐）。
 
 ## [Unreleased]
+
+### 新增（AGENTS.md 软链接指向 CLAUDE.md）
+
+- **为什么改**：CLAUDE.md 是 Claude Code 自动加载的项目指令文件，AGENTS.md 是其它 agent 工具（ZCode 等）识别的通用入口文件名——建软链接让两类工具共用同一份项目指令，不必维护两份内容。
+- **改了什么**：项目根新建软链接 `AGENTS.md`（相对路径指向 `CLAUDE.md`，clone 后依然有效）。已验证链接可正常读取内容，git 以符号链接类型跟踪（2026-08-25）。
+
+### 变更（更名 PersonalAssistantAgent → ExecutiveAssistantAgent：目录 / GitHub 仓库 / 双语 README / CLAUDE.md / logo 职称）
+
+- **为什么改**：Kit 的 Title 已于 2026-08-23 由「个人助理」改为「总经理助理」，但项目名（本地目录 / GitHub 仓库 / 文档 / logo 职称）仍是 PersonalAssistantAgent（个人助理），名字与定位不符——用户要求把名字改成符合「总经理助理」的。总经理助理的标准英文职称是 Executive Assistant，按脚手架「目录名 = 职称 Title + Agent」规范定为 ExecutiveAssistantAgent；拟人名 Kit 不变。
+- **改了什么**：本地目录与 GitHub 仓库（xhqing/ExecutiveAssistantAgent，旧名 URL 由 GitHub 自动重定向）均更名；仓库 About description 英文职称从 GM's Assistant 改为 Executive Assistant；`README.md` / `README_cn.md`（标题 / Visitors 徽章 URL / 版权署名链接）；`.claude/CLAUDE.md` 标题；`assets/logo.svg` 副标题「Assistant · 个人助理」→「Executive Assistant · 总经理助理」（顺带修正上轮 Title 改名时 logo 职称漏改）。关联同步：全局 `~/.claude/CLAUDE.md` 注册表 Kit 行与「超集关系映射」表仓库名更名（CapabilityManagerAgent `claude/CLAUDE.md` 镜像随全局对齐）；按超集规则更新 `xhqing/.claude/CLAUDE.md` 指代说明；xhqing 侧 README roster 链接 / 徽章、`traffic/badges/PersonalAssistantAgent.json` 更名、`scripts/update_traffic.py` 团队清单同步（细节记 xhqing 自己的 CHANGELOG）。
 
 ### 变更（Kit Title「个人助理」→「总经理助理」：CLAUDE.md + README 双语 + 超集同步 xhqing）
 

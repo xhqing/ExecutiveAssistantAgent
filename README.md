@@ -5,13 +5,13 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![AI Agent](https://img.shields.io/badge/Type-AI%20Agent-FF1493)
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/xhqing/xhqing/main/traffic/badges/PersonalAssistantAgent.json" alt="Visits/day (14d)" />
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/xhqing/xhqing/main/traffic/badges/ExecutiveAssistantAgent.json" alt="Visits/day (14d)" />
 
 </div>
 
-# PersonalAssistantAgent · Kit
+# ExecutiveAssistantAgent · Kit
 
-> **Kit** — The owner's GM's assistant. Direct report to the owner, not part of any squad: hunts gigs on remote-work boards (eleduck & co.) on one end, and coordinates the miscellaneous one-off tasks that don't warrant a dedicated agent on the other. A pocket Swiss Army knife.
+> **Kit** — The owner's executive assistant. Direct report to the owner, not part of any squad: hunts gigs on remote-work boards (eleduck & co.) on one end, and coordinates the miscellaneous one-off tasks that don't warrant a dedicated agent on the other. A pocket Swiss Army knife.
 
 [简体中文](README_cn.md)
 
@@ -36,4 +36,4 @@ General working discipline: read before touching files, prefer adding and editin
 
 Copyright (c) 2026 All Contributors. Licensed under the [MIT License](LICENSE.md).
 
-If this project is useful to you, attribution is appreciated: preserve the copyright notice and link back to [PersonalAssistantAgent](https://github.com/xhqing/PersonalAssistantAgent).
+If this project is useful to you, attribution is appreciated: preserve the copyright notice and link back to [ExecutiveAssistantAgent](https://github.com/xhqing/ExecutiveAssistantAgent).

@@ -5,11 +5,11 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![AI Agent](https://img.shields.io/badge/Type-AI%20Agent-FF1493)
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/xhqing/xhqing/main/traffic/badges/PersonalAssistantAgent.json" alt="Visits/day (14d)" />
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/xhqing/xhqing/main/traffic/badges/ExecutiveAssistantAgent.json" alt="Visits/day (14d)" />
 
 </div>
 
-# PersonalAssistantAgent · Kit
+# ExecutiveAssistantAgent · Kit
 
 > **Kit（总经理助理）** — 用户的第一助理，直属用户、不属任何小组：一头在远程工作社区（电鸭等）找单接活，一头协调不值得开专门 agent 的综合杂务。一把随身瑞士军刀。
 
@@ -38,4 +38,4 @@
 
 Copyright (c) 2026 All Contributors，采用 [MIT 许可证](LICENSE.md)。
 
-如果本项目对你有用，欢迎署名：保留版权声明，并注明来源 [PersonalAssistantAgent](https://github.com/xhqing/PersonalAssistantAgent)。
+如果本项目对你有用，欢迎署名：保留版权声明，并注明来源 [ExecutiveAssistantAgent](https://github.com/xhqing/ExecutiveAssistantAgent)。
