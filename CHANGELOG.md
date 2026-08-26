@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 变更（清除 CHANGELOG 条目中的个人财务状况描述并重写 git 历史）
+
+- **为什么改**：2026-08-26 安全检查发现，[1.0.0] 条目在记录新建投标 SOP 文档的原因时写入了用户个人财务状况描述（收入目标、本金状况、财务紧迫程度、职业投入状态四层表述），随公开仓库进入 git 历史。按全局规则「敏感信息禁止写入未被 .gitignore 忽略的文件」（2026-08-26 增补财务状况类型），已进入 git 历史的敏感内容须重写历史彻底清除。
+- **改了什么**：用 `git filter-repo --replace-text` 重写全部 23 个 commit——把 [1.0.0] 条目开头的个人财务背景句整体替换为「经调研确定」（只保留业务动机，不写财务背景），该条目重复两行顺带去重为一行；重写后 `git push --force --all` 覆盖远程 main（旧 head f1f73d6 → 新 head 48381d3）。验证：本地全历史与远程 main 内容的财务词扫描均 0 命中，仓库无 fork、无 tag，无第三方残留渠道。全局 CLAUDE.md 同步增补「财务状况」敏感类型并同步 CapabilityManagerAgent 镜像（记 CapabilityManagerAgent CHANGELOG，本条不重复展开）。替换规则临时文件 `tmp/replacements.txt`（含敏感原文，置于 .gitignore 忽略的 tmp/）用后已删。本条为工作区记录，待下次 `/commit` 提交。
+
 ### 新增（AGENTS.md 软链接指向 CLAUDE.md）
 
 - **为什么改**：CLAUDE.md 是 Claude Code 自动加载的项目指令文件，AGENTS.md 是其它 agent 工具（ZCode 等）识别的通用入口文件名——建软链接让两类工具共用同一份项目指令，不必维护两份内容。
@@ -128,7 +133,6 @@
 
 - **新增 `VERSION` 文件（1.0.0）**：项目标配缺失，由 `/commit` 第 9m 步按规则补齐（版本号取值：无 package.json / 主 manifest / 已有版本标题 → 取默认 `1.0.0`）。**为什么**：VERSION 是项目版本号唯一权威（全局规则「版本信息一致性」，2026-07-19 立），此前的 CHANGELOG 顶部 `## Unreleased` 段缺少对应版本标题，待下次 `/commit` 第 9k 步自动对齐。
 - **纳入子项目 xhqing（用户 GitHub 个人主页仓库）**（2026-08-10，用户指定「xhqing 这个以我的名字命名的项目作为你的子项目交给你负责」）：按「Agent 项目与子项目的 `.claude/` 超集关系」规则（2026-08-10 立）执行——在 `.claude/CLAUDE.md` 新增「子项目清单」节登记 xhqing；在 xhqing 项目新建 `.claude/CLAUDE.md`（Kit 的 CLAUDE.md 全文 + 顶部指代说明，指明适用对象为 xhqing 子项目）与 `.gitignore`（沿用 Kit 规则：运行时数据 docs/、artifacts/、本地配置 settings.local.json、tmp/、密钥兜底等）。**为什么**：xhqing 是用户的 GitHub 个人主页仓库（README 中英双语、含 Kit 拟人名署名），与 Kit 归属一致；纳入子项目后，用户只操作 xhqing 时也能加载 Kit 的完整规则。同步过程中因用户同步清理 Kit 的 `.claude/`（删 settings.json 与 hooks，见「移除」节），最终按清理后最新状态对齐：两个项目的 `.claude/` 均仅剩 CLAUDE.md，diff 验证一致。
-- **新增 `docs/task-pool-bidding-sop.md`（任务池投标 SOP）**：经调研确定「AI 服务接单 + 任务池投标」为确定性最高的获客路径，把对话中沉淀的方法论固化为可执行文档，含每日 4 小时 SOP、三类单筛选标准、三份可复用标书模板、破冰与止损点、从一次性单转合约单的路径。文档存放于 `docs/`（.gitignore 忽略的本地业务数据目录，不随开源仓库公开）。
 - **新增 `docs/task-pool-bidding-sop.md`（任务池投标 SOP）**：经调研确定「AI 服务接单 + 任务池投标」为确定性最高的获客路径，把对话中沉淀的方法论固化为可执行文档，含每日 4 小时 SOP、三类单筛选标准、三份可复用标书模板、破冰与止损点、从一次性单转合约单的路径。文档存放于 `docs/`（.gitignore 忽略的本地业务数据目录，不随开源仓库公开）。
 - **新增 `CHANGELOG.md`**：项目标配文件缺失，按纪律补齐；本条目即本次变更记录。`VERSION` 文件暂未创建，版本条目待 VERSION 确定后对齐。
 - **`docs/task-pool-bidding-sop.md` 更新**：把「每天扫 EigenFlux feed 一次」加进每日 SOP 表格（上午随刷单顺手做，≤10 分钟），并在第八节新增「EigenFlux 情报扫描」说明——定位为行业情报源 + 潜在线索池，明确判断标准（协作/知识交换类跳过，带预算/交付物才投入）与边界（不进主线 4 小时，避免分散精力）。
