@@ -22,6 +22,9 @@ __pycache__/
 tmp/
 
 
+# 本地敏感变更记录（个人隐私类变更，不公开）
+CHANGELOG.local.md
+
 # 本机密钥通用兜底（保留 .env.example）
 .env
 .env.*
