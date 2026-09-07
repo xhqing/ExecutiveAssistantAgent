@@ -4,6 +4,26 @@
 
 ## [Unreleased]
 
+### 新增（CI 门禁与 main 分支保护：dev-workflow 工作流落地）
+
+- **为什么改**：全团队统一门禁纪律（dev-workflow skill，2026-09-06）——main 必须永远绿，所有改动走「功能分支 → PR → CI 验证合并结果 → 绿灯合并」，把「改 A 坏 B」拦在合并进 main 之前；本项目此前无 CI、无分支保护，main 可被直推。本次为 `chore/rename-sync` 分支提交做准备时按 skill 第 0 步门禁自检发现三项缺口（无 CI、无保护、auto-merge 未开）并全部补齐。
+- **改了什么**：远端 main 新增 `.github/workflows/ci.yml`（纯文档仓库极简模板：checkout + 空验证，job 名 `validate`，push main / pull_request / workflow_dispatch 三触发）；main 分支保护（required check `validate`、strict 模式、enforce_admins、0 approvals、禁 force push 与删除）；仓库 auto-merge 开关打开。过程中两件事：① gh 的 OAuth token 缺 `workflow` scope，GitHub 拦截其创建 `.github/workflows/` 文件（API 一律 404，经对照实验确证），已按用户拍板跑 `gh auth refresh -s workflow` 补齐；② skill 模板自带的 `run: echo "... repository: gate pass"` 是非法 YAML（plain scalar 含冒号空格，PyYAML 实测 ScannerError），首次 workflow 解析失败致 main 短暂红灯，经 PR #1 修复（`run` 值整体加单引号）——这也是本项目第一个走完整「PR → CI 绿 → squash 合并」链路的提交。排查 API 404 期间在远端 main 留下 6 个零净变化的测试 commit（用户拍板保留不清理）。本地分支 `chore/rename-sync` 已对齐最新 main。
+
+### 变更（小组更名同步：任务池投标小组 → 工作接单小组）
+
+- **为什么改**：用户 2026-09-06 拍板小组更名（「任务池投标」降为小组下的接单策略之一、与招聘平台求职并列），Kit 的对口表述须同步。「你是谁」段历史注记里的「任务池投标路线」是 2026-08-23 当时口径的演变记录，保留不改。
+- **改了什么**：① `CLAUDE.md`（AGENTS.md 软链接同源）：工作原则第一条、「你的位置」的小组名两处；② `README.md` / `README_cn.md` 职责第一条 squad 名（task-pool bidding squad → work-intake squad）。子项目 xhqing 同步（记 xhqing CHANGELOG）。
+
+### 变更（Hopkins 仓库更名引用同步：BidOptimizerAgent → ApplyOptimizerAgent，找单口径扩「找单找岗」）
+
+- **为什么改**：电鸭平台岗位多为全职岗、有详细 JD、沟通需发简历——与 BOSS直聘求职同构，「投单」与「找工作」合流为同一条投递漏斗（2026-09-06 用户拍板），Hopkins 项目由 BidOptimizerAgent 更名 ApplyOptimizerAgent（Title「投递转化率优化师」、拟人名 Hopkins 保留）。Kit 的对口协作引用与「找单」口径须同步——入口描述从「在远程工作社区投标」扩为「在远程工作社区与招聘平台投递」。
+- **改了什么**：① `CLAUDE.md`（AGENTS.md 软链接同源）：副标题「找单接活入口」→「找单找岗接活入口」、「你是谁」段投递渠道描述扩展并补口径演变注记、工作原则第一条改为「投递转化优化归 Hopkins（ApplyOptimizerAgent）」、「你的位置」改「找单找岗发起人」；② `README.md` / `README_cn.md` 职责第一条同步（gig & job hunting / 找单找岗接活）。子项目 xhqing 的同名内容同步改（记 xhqing CHANGELOG）。
+
+### 变更（子项目清单 xhqing 本地路径更正）
+
+- **为什么改**：Kit 会话为新建 TestEngineerAgent 做关联同步时（2026-09-06）实测发现，子项目清单登记的 xhqing 本地路径 `/Users/xhq/Documents/Projects/xhqing` 已不存在，仓库实际在 `/Users/xhq/Developer/xhqing`——登记与现实脱节会导致后续同步找错地方。
+- **改了什么**：`CLAUDE.md` 子项目清单 xhqing 条目的本地路径更正为实际路径，并注明更正原因与日期。其余未动。
+
 ### 新增（CHANGELOG.local.md：敏感变更的本地记录文件）
 
 - **为什么改**：涉及用户个人隐私的变更不适合写入公开 CHANGELOG——公开仓库任何人可见，且会进 git 历史。为这类变更建立本地专属记录文件，与公开 CHANGELOG 分流。
