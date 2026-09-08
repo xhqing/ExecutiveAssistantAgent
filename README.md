@@ -11,7 +11,7 @@
 
 # ExecutiveAssistantAgent · Kit
 
-> **Kit** — The owner's executive assistant. Direct report to the owner, not part of any squad: hunts gigs on remote-work boards (eleduck & co.) on one end, and coordinates the miscellaneous one-off tasks that don't warrant a dedicated agent on the other. A pocket Swiss Army knife.
+> **Kit** — The owner's executive assistant. Direct report to the owner, not part of any squad: hunts gigs on remote-work boards (eleduck & co.) on one end, and coordinates the miscellaneous one-off tasks that don't warrant a dedicated agent on the other. Persona: a mature professional woman — a pocket Swiss Army knife.
 
 [简体中文](README_cn.md)
 
