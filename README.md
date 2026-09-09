@@ -11,7 +11,7 @@
 
 # ExecutiveAssistantAgent · Kit
 
-> **Kit** — The owner's executive assistant. Direct report to the owner, not part of any squad: hunts gigs on remote-work boards (eleduck & co.) on one end, and coordinates the miscellaneous one-off tasks that don't warrant a dedicated agent on the other. Persona: a mature professional woman — a pocket Swiss Army knife.
+> **Kit** — The owner's executive assistant. Direct report to the owner, not part of any squad: the team's generalist — picks up and handles almost anything. Persona: a mature professional woman — a pocket Swiss Army knife.
 
 [简体中文](README_cn.md)
 
@@ -19,10 +19,10 @@
 
 ## What it does
 
-Two jobs:
+The team's generalist — picks up and handles almost anything:
 
-- **Gig & job hunting (upstream of the work-intake squad).** Finds and applies to AI-service gigs and jobs across remote-work communities and job platforms. Conversion optimization belongs to Hopkins (ApplyOptimizerAgent); contracts and payments belong to Justin (LegalAgent).
 - **General coordination.** Research, organizing information, drafting emails and copy, spreadsheets, format conversion, small scripts, reminders, and answers to all kinds of questions. Anything that belongs to the sales pipeline (sourcing, production, marketing, closing, review) is referred to the specialist agents (Scout / Wright / Buzz / Vendy / Echo).
+- **Handoffs.** Work intake — gig & job hunting, applications — belongs entirely to Hopkins (ApplyOptimizerAgent); contracts and payments belong to Justin (LegalAgent).
 
 ## Built-in skills
 

@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+### 变更（Kit 定位口径调整：多面手，找单找岗整体移交 Hopkins）
+
+- **为什么改**：用户 2026-09-08 两步明确口径——① Kit 是用户的第一助理、团队多面手，介绍不再强调找单找岗（该职能不值一提）；② 找单接活找工作整体交给 Hopkins（ApplyOptimizerAgent）专门负责，原「Kit 发起、Hopkins 转化」的分工废止。
+- **改了什么**：① `CLAUDE.md`（AGENTS.md 软链同源）四处——引语行、「你是谁」段（双头表述改多面手定位、历史注记更新）、「工作原则」第一条（「找单找岗接活是你的主动阵地」改「多面手是你的定位」+ 移交 Hopkins 表述）、「你的位置」（删「找单找岗发起人」）；② `README.md` / `README_cn.md`——引语与 Persona 行改多面手、「职责」节由「两头干活」改为「综合协调 + 分工衔接」（找单找岗条目删除、改为移交说明）；③ 子项目 xhqing / CyberRipple 超集 `.claude/CLAUDE.md` 再生成同步；④ 全局 `~/.claude/CLAUDE.md` 注册表 Kit 行、Hopkins 行（职责扩为工作接单全链路）、销售流水线段落同步更新，CapabilityManagerAgent 镜像同步（记其 CHANGELOG）；⑤ xhqing README 双语 Hopkins 条目改全链路专门负责（记 xhqing CHANGELOG）。
+
+### 新增（接管子项目 CyberRipple：组织总览仓库）
+
+- **为什么改**：用户 2026-09-08 把 CyberRipple 仓库（当天 Hopkins 会话产出的组织总览 README 中英双语初稿）交由 Kit 负责。按超集规则登记子项目、落地 Kit CLAUDE.md 内容、补齐项目标配。
+- **改了什么**：① 本项目 `CLAUDE.md`（AGENTS.md 软链接同源）子项目清单新增 CyberRipple 条目；② 子项目内新建 `.claude/CLAUDE.md`（本项目 CLAUDE.md 正文全文 + 指代说明，方式与既有子项目 xhqing 一致，进 git）；③ 子项目补齐标配 `VERSION`（1.0.0）/ `CHANGELOG.md` / `.gitignore` / `LICENSE.md`（MIT）；④ 全局 `~/.claude/CLAUDE.md` 超集关系映射表新增 Kit → CyberRipple 行，并同步 CapabilityManagerAgent `claude/CLAUDE.md` 镜像（记 CapabilityManagerAgent CHANGELOG，本条不重复展开）。子项目 README 的名册括注删除（用户同轮指令）记 CyberRipple 自己的 CHANGELOG。
+
 ### 新增（CI 门禁与 main 分支保护：dev-workflow 工作流落地）
 
 - **为什么改**：全团队统一门禁纪律（dev-workflow skill，2026-09-06）——main 必须永远绿，所有改动走「功能分支 → PR → CI 验证合并结果 → 绿灯合并」，把「改 A 坏 B」拦在合并进 main 之前；本项目此前无 CI、无分支保护，main 可被直推。本次为 `chore/rename-sync` 分支提交做准备时按 skill 第 0 步门禁自检发现三项缺口（无 CI、无保护、auto-merge 未开）并全部补齐。
