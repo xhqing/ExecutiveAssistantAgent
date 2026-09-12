@@ -4,6 +4,26 @@
 
 ## [Unreleased]
 
+### 变更（CLAUDE.md 删去「由 Claude Code 自动加载」说明句）
+
+- **为什么改**：用户 2026-09-12 要求 CLAUDE.md 不再强调本文由 Claude Code 加载，团队全部项目的 CLAUDE.md 统一清理此类语句。
+- **改了什么**（2026-09-12）：`CLAUDE.md` 开头角色定位行删去句尾「本文件由 Claude Code 在每次会话开头自动加载。」，角色描述本身保留。
+
+### 变更（通用能力句式去 find-skill 提及）
+
+- **为什么改**：全局 find-skill skill 已被用户删除（实际使用中从未用到），各处不再提及；本项目 CLAUDE.md 通用能力句式仍列着 find-skill，2026-09-12 联动清理。
+- **改了什么**：`CLAUDE.md` 通用能力句式「（anysearch 实时搜索、find-skill 找 skill 等）」→「（anysearch 实时搜索等）」。子项目 blog、CyberRipple、xhqing 的同款句式已按超集规则同步（不另记其 CHANGELOG）。
+
+### 新增（接管子项目 blog：个人博客仓库）
+
+- **为什么改**：用户 2026-09-12 把 blog 仓库（github.com/xhqing/blog，docsify 静态博客，线上 xhqing.github.io/blog，2023 年起运行）交由 Kit 负责。按超集规则登记子项目、落地 Kit CLAUDE.md 内容、补齐项目标配。过程中发现既有子项目 xhqing / CyberRipple 的超集 `.claude/CLAUDE.md` 副本落后于权威源（仍引用已删除的 `~/.claude/rules/`、缺「子项目清单」节），一并按规则重新生成对齐。
+- **改了什么**：① 本项目 `CLAUDE.md`（AGENTS.md 软链同源）子项目清单新增 blog 条目；② blog 本地克隆至 `/Users/xhq/Developer/blog`（原无本地副本），新建 `.claude/CLAUDE.md`（本项目 CLAUDE.md 正文全文 + 指代说明），补齐标配 `VERSION`（1.0.0）/ `CHANGELOG.md`，`.gitignore` 追加团队标准忽略项（`docs/` 为博客站点内容目录、不忽略）——均记 blog 自己的 CHANGELOG；③ xhqing / CyberRipple 超集 `.claude/CLAUDE.md` 重新生成，对齐当前权威源；④ 全局 `~/.claude/CLAUDE.md` 超集关系映射表新增 Kit → blog 行，并同步 CapabilityManagerAgent `claude/CLAUDE.md` 镜像（记 CapabilityManagerAgent CHANGELOG，本条不重复展开）。
+
+### 变更（assets/logo.svg 副标题去中文）
+
+- **为什么改**：全局规则新增「Logo / 图标资产文字一律用英文」（2026-09-12 用户立，起因 Swing 仓库 logo 副标题混入中文被指出）：logo 是面向全球读者的视觉标识，中文受众已有 README_cn.md 双语通道；且 SVG 中文依赖查看环境的字体回退，渲染不可控。本次为按新规批量清理存量。
+- **改了什么**：`assets/logo.svg` 副标题「Executive Assistant · 总经理助理」→「Executive Assistant」。
+
 ### 变更（Kit 定位口径调整：多面手，找单找岗整体移交 Hopkins）
 
 - **为什么改**：用户 2026-09-08 两步明确口径——① Kit 是用户的第一助理、团队多面手，介绍不再强调找单找岗（该职能不值一提）；② 找单接活找工作整体交给 Hopkins（ApplyOptimizerAgent）专门负责，原「Kit 发起、Hopkins 转化」的分工废止。
@@ -94,18 +114,15 @@
 - **为什么改**：杀掉旧 ai-server 后重试登录，仍在最后一步 `refreshJwtToken error: 400`（明文 HTTP 撞代理）。深挖发现换 JWT 的请求不走 ai-server 的 TTNet 通道（新 server 日志 16 条全 `via_proxy:false` 却仍失败），而是扩展宿主（exthost）里另一条 axios 路径——它吃的是**进程环境变量** `HTTPS_PROXY`。而 exthost 进程环境里的 `HTTP_PROXY/HTTPS_PROXY=127.0.0.1:1087`、`NO_PROXY` 仅默认三项，来源不是 shell（VSCode 主进程由 launchd 启动、无这些变量），而是 **VSCode `http.proxySupport` 读系统代理后给扩展进程注入的环境变量**，注入时丢掉了系统 ExceptionsList 里的 `*.cn`。TraeCode 的 `trae.advanced.proxyMode` 只管 TTNet 通道，管不到这条 axios 路径；其捆绑 HTTP 栈会读 `no_proxy`/`NO_PROXY` 环境变量做豁免（解混淆确认）。验证闭环：curl 模拟「明文 POST 打代理端口 + Host 头」精确复现同款 400；`NO_PROXY` 覆盖 `api.trae.com.cn` 后同请求直连成功（到达 Trae API 网关返回业务层 JSON）。
 - **改了什么**：① `~/.zshrc` 的 `NO_PROXY` 追加 `.trae.com.cn,.trae.cn,.marscode.com,.marscode.cn,.byted.org,.zijieapi.com`（管终端启动的进程）；② VSCode 用户设置新增 `http.proxy: http://127.0.0.1:1087` + `http.noProxy: [.trae.com.cn, .trae.cn, .trae.ai, .marscode.com, .marscode.cn, .byted.org, .zijieapi.com]`（用户设置优先于系统代理，VSCode 按它给扩展进程注入环境变量，`.cn` 等豁免不再丢失）。需彻底重启 VSCode 使 exthost 拿到新环境变量。
 
-
 ### 修复（TraeCode 登录走到「网页认证转圈」：后台 ai-server 子进程残留旧代理配置）
 
 - **为什么改**：上一条 no_proxy 修复后登录能跳转网页了，但网页端一直「认证中」转圈。排查插件日志发现授权流程其实走完了大半：`ExtensionUriHandler handleUri` → `login successfully`（已拿到 refresh_token），卡在最后一步「refresh_token 换 JWT」——`refreshJwtToken error: Request failed with status code 400`，响应头又见 `proxy-connection: keep-alive`（这个请求又走了代理），插件随即 `deleteAllInfo` 清掉登录信息判定失败，网页端等不到确认永远转圈。根因：发起该请求的不是插件本体，而是后台 ai-server 子进程（`aiServerMainV2.js` / `ai-agent` / `ckg_server`，23:18 启动）；这些进程在 VSCode reload window 后**不会重启**，插件只是重连旧 server，旧进程仍带着改配置前的 `system` 代理设置 → 明文 HTTPS 撞代理 400。
 - **改了什么**：杀掉 4 个旧 ai-server 后台进程（`kill` PID 1693/1707/1706/1705），插件自动以新配置重新拉起全新 server（23:47 启动，新 ckg 端口 52812）。验证新 `ai-agent` 日志：全部请求 `via_proxy:false`（16 条全直连）、10 成功 0 失败。经验教训：TraeCode 的 `trae.advanced.proxyMode` 改完后，仅 reload window 不够——后台 `~/.marscode` 的 ai-server 进程要一并杀掉重启才会应用新代理配置（也可彻底退出 VSCode 再重开）。
 
-
 ### 修复（TraeCode VSCE 无法登录：插件走系统代理时 HTTPS 被明文转发）
 
 - **为什么改**：用户装好 TraeCode（marscode.marscode-extension v1.7.8，VS Code Marketplace）后点登录无反应。排查 `~/.marscode/logs/` 客户端日志，四个登录接口（api.trae.com.cn / api.marscode.com / 企业版 cn / 企业版 sg 的 `GetLoginGuidance`）全部报 `400 Bad Request — "The plain HTTP request was sent to HTTPS port" (Tengine)`。根因链：本机系统 HTTP/HTTPS 代理指向 `127.0.0.1:1087`（xray，ProxyToolkit）→ 插件 `trae.advanced.proxyMode` 默认 `system` 跟系统代理 → 插件的 TTNet 网络栈把 HTTPS 请求以明文 HTTP 发给代理（不走标准 CONNECT 隧道）→ 源站拒绝。旁证：curl 走同一代理用标准 CONNECT 是 200（xray 本身正常，是插件代理实现的缺陷）；绕过代理直连 cn 区接口也是 200（直连可用）。另：插件没有公开文档说明 proxyMode 取值，从 extension.js 解混淆得到取值为 `no_proxy` / `manual` / `system`。
 - **改了什么**：VSCode 用户设置（`~/Library/Application Support/Code/User/settings.json`）新增 `"trae.advanced.proxyMode": "no_proxy"`，让插件绕过系统代理直连（Trae 域名在国内直连可用，PAC 分流里本就走 DIRECT）。该文件是本机配置、不在任何 git 仓库，此处仅记录变更过程。
-
 
 ### 变更（P6 上手 3 步：仓库指引精确到 owner/repo + 舰队→团队）
 
