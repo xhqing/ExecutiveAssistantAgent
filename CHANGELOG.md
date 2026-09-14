@@ -4,6 +4,26 @@
 
 ## [Unreleased]
 
+### 变更（Agent 方向简历 PDF 重建：中英两份，清除失实表述）
+
+- **为什么改**：同日两轮 md 修正（删 JavaScript / TypeScript、zcode-cli 归属如实化、删废弃 rules 目录表述）后，docs/resume/ 下已构建的 PDF 产物仍是 9 月 5 日旧版——继续用旧 PDF 投递会把失实表述带出去（TODO T5，橙色）。
+- **改了什么**（2026-09-14）：md2pdf 工艺重建两份——中文版（default.css）、英文版（resume-en.css），排版定量验证全绿（A4 纵向、左右边距对称 6%/93%、各 2 页）；内容经 pandoc 中间 HTML 核对：失实表述 0 命中、修正后表述（协议对接/二次开发/CLAUDE.md 规则统一管理等）全部在场；已覆盖正式 PDF（md5 均已更新，体积与旧版相当）。T5 移入 TODO-archive.md。注：该工艺 Chrome 打印 PDF 无 pdftotext 文本层（新旧版一致），内容核对用 pandoc 中间 HTML 等价验证。
+
+### 变更（Agent 方向简历二轮修正：zcode-cli 归属如实化 + 删废弃的 rules 目录表述）
+
+- **为什么改**：用户 2026-09-14 澄清 zcode-cli 系他人开源项目的二次开发（上游 3.8.1 基线 + 43 个修补 commit），简历「周边工具链」原句把「app-server 协议逆向」归因于本人、主力仓库列表含 zcode-cli——均有夸大；另全局 `~/.claude/rules/` 目录已废弃删除，CapabilityManagerAgent 行「全局 skills / rules / CLAUDE.md 统一管理」表述指向不存在的功能。GitHub 查证：zcode-vsce 为 0.1.x 起步从零自研（initial commit 起 7 个功能 commit），保留主力仓库（待用户最终确认）。
+- **改了什么**（2026-09-14）：`docs/resume/resume-agent.md` 与 `resume-agent-en.md` 各三处——① CapabilityManagerAgent 行改「全局 skills 与 CLAUDE.md 规则统一管理」；② 周边工具链句改「非官方 VSCode 扩展客户端（app-server 协议对接）与终端客户端（开源客户端二次开发、40+ 功能修补）」（删「协议逆向」归因）；③ 主力仓库列表删 zcode-cli、保留 zcode-vsce。PDF 重建待办 T5 不变。
+
+### 新增（.pi/skills/language-partner：找语伴方案库 skill）
+
+- **为什么改**：用户 2026-09-14 调研「练英语口语 + 视频沟通表达」的视频聊天软件，追问「方便找到想学中文的英语母语者」的渠道，并要求不限视频沟通、能线下更好，希望把调研结论沉淀为项目级 skill——下次说「找语伴」时直接给出靠谱方案，不再重新调研。
+- **改了什么**：新建 `.pi/skills/language-partner/SKILL.md`（pi 项目级 skill 原生位置，项目受信任即加载）。内容：找语伴的本质（双向供需匹配）与供需现实（学英语的中国人远多于学中文的英语母语者，应主动去英文世界找）；四条路线渠道库——线上配对 App（HelloTalk / Tandem / Speaky 等）、社区发帖（Reddit r/language_exchange / Conversation Exchange / Discord）、线下场景（Meetup 城市语言交换、城市英语角（北京英语角实例）、大学语伴项目、线上转线下）、付费外教（Cambly / italki 保底）；实操技巧、安全注意、英文招募帖与 App 自我介绍两个交付物模板；末尾标注数据快照时间（2026-09）并指引实时核验时用 anysearch / agent-reach。
+
+### 变更（Agent 方向简历（中/英）语言行删 JavaScript / TypeScript）
+
+- **为什么改**：用户 2026-09-14 澄清不会 JavaScript / TypeScript，简历「语言与工程」行（`docs/resume/resume-agent.md` / `resume-agent-en.md`）此前误含该表述，属失实陈述。简历内已声明 AI 协作开发模式（代码实现大量由 AI 完成），zcode-cli 等 TS 仓库与「本人不手写 TS」自洽，仅删技能行即可、无需另加说明。表述源头为旧版算法简历技能表（`original.md` 存档内原有 JavaScript）——存档保留原样不动，但旧版算法简历 PDF（本机 Documents 下）如仍在用同样失实，已提醒用户。
+- **改了什么**（2026-09-14）：两份简历第 13 行语言行删「JavaScript / TypeScript」（目录已被 .gitignore 忽略，改动不进 git）。已构建的 PDF 产物仍含旧表述，投前须重建——记 TODO T5。
+
 ### 变更（CLAUDE.md 删去「由 Claude Code 自动加载」说明句）
 
 - **为什么改**：用户 2026-09-12 要求 CLAUDE.md 不再强调本文由 Claude Code 加载，团队全部项目的 CLAUDE.md 统一清理此类语句。
