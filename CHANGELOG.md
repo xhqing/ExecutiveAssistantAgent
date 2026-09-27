@@ -4,6 +4,21 @@
 
 ## [Unreleased]
 
+### 新增（tmp/model-speed-test/probe_smooth.py：MiMo 流式粒度参数试探）
+
+- **为什么改**：用户 2026-09-25 追问「mimo-v2.6-pro-ultraspeed 可以涓流输出吗」——需核查官方文档是否存在流式粒度参数，并实测验证。
+- **改了什么**：新建 `probe_smooth.py`。结论：官方 API 文档只有 `stream: true/false` 一个开关、无任何粒度参数；实测 `stream_options.chunk_size=1`、`flush_interval_ms=5`、`stream_granularity=token` 三个候选参数全部被静默忽略（均为 24 块 / 间隔 62.5–62.8ms，与 baseline 一致）；结合官方博客（DFlash 块级并行推测解码）判定蹦块为服务端机制性行为，客户端参数无法改成涓流。另核查 pi TUI 无平滑渲染配置（bundle 里的 typewriter 为彩蛋动画组件，与流式渲染无关）。
+
+### 新增（tmp/model-speed-test/probe_real.py：贴近 pi 真实场景的体感速度实验）
+
+- **为什么改**：用户 2026-09-25 反馈体感上 MiMo-V2.6-Pro-UltraSpeed 比 deepseek-flash 输出更慢，与首版实测（纯解码速度 MiMo 快）矛盾——需补充贴近真实使用场景（长上下文 + 开思考 + 编码问题 + 走代理/直连双路径）的实验，定位体感差异来源。
+- **改了什么**：新建 `probe_real.py`（测量到首流片段/到可见正文/渲染刷新频率/总时长）+ `real_results.json`。定位出三个体感差异来源：MiMo 正文以约 10 次/秒大块蹦出（约 150 字/块）而 deepseek 约 300 次/秒逐 token 潮流；MiMo 首 token 抖动大（0.9–12.3s，直连也有极端值）；开思考后正文被推后 3–5 秒（两家均如此，MiMo 思考段也蹦块）。解码速率仍是 MiMo 快（464–493 vs 212–229 tok/s），体感输在渲染平滑度与首字抖动。
+
+### 新增（tmp/model-speed-test/：deepseek-flash 与 MiMo-V2.6-Pro-UltraSpeed 输出速度实测脚本与数据）
+
+- **为什么改**：用户 2026-09-25 问「deepseek-flash 与 mimo-v2.6-pro-ultraspeed 哪个输出速度更快」，需要实测数据而非只凭宣传口径；顺带发现本机代理对两家 API 建连延迟影响不同，需一并验证。
+- **改了什么**：新建 `tmp/model-speed-test/` 下 4 个脚本与结果 JSON（`bench_speed.py` 数字计数+usage 统计、`probe_stream.py` 流式到达节奏探测、`probe_prose.py` 中英文散文、`probe_prefill.py` 8k 长上下文 TTFT、`probe_dump.py` 原始流诊断）。实测结论（2026-09-25 晚，直连）：MiMo UltraSpeed 解码速度全面更快——中文散文 213 vs 131 tok/s（字符速率 304 vs 199 字符/s）、英文散文 293 vs 130 tok/s（1366 vs 628 字符/s）、数字内容约 1000 vs 420 tok/s；8k 输入 TTFT 两者相当（0.78 vs 0.60 s）。另发现两个环境坑：① 本机 HTTP 代理（127.0.0.1:1087）路由 Xiaomi 域名走境外，新建连接 TLS 多花约 1 s（直连无此开销）；② Python requests `iter_lines(decode_unicode=True)` 对无 charset 声明的流式中文会乱码/丢 chunk，须改为按字节读取后逐行 UTF-8 解码。原始数据见 `tmp/model-speed-test/*.json`。
+
 ### 变更（Agent 方向简历 PDF 重建：中英两份，清除失实表述）
 
 - **为什么改**：同日两轮 md 修正（删 JavaScript / TypeScript、zcode-cli 归属如实化、删废弃 rules 目录表述）后，docs/resume/ 下已构建的 PDF 产物仍是 9 月 5 日旧版——继续用旧 PDF 投递会把失实表述带出去（TODO T5，橙色）。
