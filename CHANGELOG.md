@@ -1,8 +1,10 @@
 # CHANGELOG
 
-本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（当前版本条目待 VERSION 文件确定后对齐）。
+本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
-## [Unreleased]
+## [1.0.0] - 2026-10-05
+
+本版本为项目**首个正式版**：汇总项目建立至 2026-10-05 的全部变更——含项目更名（PersonalAssistantAgent → ExecutiveAssistantAgent）与角色定位调整（总经理助理 / 团队多面手）、三个子项目接管（xhqing / CyberRipple / blog）、CI 门禁与远端分支保护工作流落地、两个项目级 skill（language-partner / termux-ssh），以及多轮文档与合规清理。以下为完整变更条目。
 
 ### 新增（`.pi/skills/termux-ssh/`：Android 手机 SSH 操作流程 skill）
 
@@ -199,8 +201,6 @@
 
 - **为什么改**：用户要求（2026-08-17）访问量徽章名需表达「最近半月日均访问量」口径——xhqing 集中统计侧的 badge JSON label 已从 `Visitors` 改为 `Visits/day (14d)`（`Visits/day` 是 shields.io 表达日均的惯例写法、`(14d)` 标注 14 天滚动窗口），各仓 README 的徽章 alt 文本同步对齐，避免 alt 与徽章实际显示文字脱节。
 - **改了什么**：README 徽章区 `alt="Visitors"` → `alt="Visits/day (14d)"`，仅改 alt 文本，endpoint URL、数据源、徽章口径均不变（口径改动记 xhqing 仓库 CHANGELOG，本仓只改 alt）。
-
-## [1.0.0] - 2026-08-10
 
 ### 变更（Visitors 徽章 alt 文本首字母大写：README 访问量徽章命名统一）
 
