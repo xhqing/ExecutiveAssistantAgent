@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 新增（`.pi/skills/termux-ssh/`：Android 手机 SSH 操作流程 skill）
+
+- **为什么改**：用户 2026-10-04 要求把当日「通过 SSH 操作手机（Termux）」的实战流程整理成项目级专属 skill，「下次操作手机可以少踩一些坑」。当日实战中真实踩到的坑：`termux-setup-storage` 不输 y 会中止且之后写 `/sdcard` 报 Permission denied；`authorized_keys` 用 heredoc 写会被拆行、只报 `Permission denied (publickey)` 难以定位；Termux 被系统冻结导致 `banner exchange` 超时 / 被杀导致 `Connection refused`；手机目录真实名字带前导空格（`" 我的文件"`）导致按中文名 `ls` 报 No such file；`Android/data/` 对 Termux 不可读；`pm list packages` 受包可见性过滤不可信。
+- **改了什么**：新建 `termux-ssh` skill（SKILL.md 96 行 + `references/setup.md` 89 行，description 391/1024 字符、`check_description.py` 通过）：正文写「健康检查 → 三种失败形态对号入座 → 日常操作（找文件 / 取文件 / 校验 / 回写）→ 走不通的路 → 安全底线」，搭建细节与排错手册拆到 references；本机 IP、Termux 用户名一律用占位符（真实值只在 `~/.ssh/config` 的 `android` 别名里），符合「skill 内容纯净性」规矩。
+- **顺带修正**：`README.md` / `README_cn.md` 的 skills 清单此前已过期（还列着 anysearch · find-skill，而它们早已按「通用能力单一出口」收归全局）——两版同步改为项目实际的两个 skill（`language-partner` · `termux-ssh`）。
+
 ### 新增（tmp/model-speed-test/probe_smooth.py：MiMo 流式粒度参数试探）
 
 - **为什么改**：用户 2026-09-25 追问「mimo-v2.6-pro-ultraspeed 可以涓流输出吗」——需核查官方文档是否存在流式粒度参数，并实测验证。

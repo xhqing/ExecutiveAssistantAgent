@@ -26,7 +26,8 @@ The team's generalist — picks up and handles almost anything:
 
 ## Built-in skills
 
-- `anysearch` · `find-skill` — general search and skill discovery
+- `language-partner` — find a real-human language exchange partner (tandem): where to look, how to reach out, safety notes
+- `termux-ssh` — operate the Android phone over SSH (Termux): connecting, transferring and verifying files, and the pitfalls list (Termux being frozen, shifting phone IP, Chinese/space paths, Android sandbox limits)
 
 ## Constraints
 
