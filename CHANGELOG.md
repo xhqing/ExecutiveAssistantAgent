@@ -2,6 +2,14 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 变更（termux-ssh skill：补一条 Android 存储授权陷阱）
+
+- **为什么改**：2026-10-06/07 排查「KeePassDX 打不开库、提示访问被文件管理器撤销」时定位到根因——**Android 的 SAF 只对「文件管理器创建的目录」做授权持久化** ✗，而该同步目录是当初用 Termux（SSH）建的：当场从文件管理器授权能打开、**下次从 App 列表进就失效**；把手机端 Syncthing 目录迁到用文件管理器创建的目录后恢复正常 ✓。这是用 SSH 操作手机会踩到的典型坑，而且症状容易误判成「库坏了 / 同步坏了」（本次就先后误判了三次：以为是 Argon2 版本、以为是 App 版本、以为是文件被替换），值得沉淀。
+- **改了什么**：`.pi/skills/termux-ssh/SKILL.md`「走不通的路」表新增一行（Termux 建目录 → 别的 App 拿不到持久授权，要建的目录请让用户用文件管理器建）。
+- **顺带**：① 本机 KeePass 设置说明写入 `~/Backup/KeePass/README.md`（**本机文件，不进仓库**，含资产位置 / 同步链路 / 恢复路径 / 踩过的坑）；② 剩余工作记入 `TODO.local.md`（T6 本机实时备份、T7 云端备份、T8 keyfile 冗余、T9 纸质卡、T10 演练提醒）。
+
 ## [1.0.0] - 2026-10-05
 
 本版本为项目**首个正式版**：汇总项目建立至 2026-10-05 的全部变更——含项目更名（PersonalAssistantAgent → ExecutiveAssistantAgent）与角色定位调整（总经理助理 / 团队多面手）、三个子项目接管（xhqing / CyberRipple / blog）、CI 门禁与远端分支保护工作流落地、两个项目级 skill（language-partner / termux-ssh），以及多轮文档与合规清理。以下为完整变更条目。

@@ -58,7 +58,7 @@ ssh android 'find /storage/emulated/0 -maxdepth 4 -type d -iname "*keepass*" 2>/
 **取文件到 Mac**（比 `scp` 省去远端路径转义麻烦，且非交互 ssh 不分配 PTY、二进制安全）：
 
 ```bash
-ssh android 'cat "/storage/emulated/0/Sync/KeePass/vault.kdbx"' > ~/Sync/KeePass/vault.kdbx
+ssh android 'cat "/storage/emulated/0/Documents/vault.kdbx"' > ~/Sync/vault.kdbx
 ```
 
 **完整性校验**（两端算法都要对）：
@@ -81,6 +81,7 @@ shasum -a 256 <本地文件>                     # Mac 侧
 | 列 `/storage/` 或 `/storage/emulated/` | `Permission denied`（正常限制）；用 `~/storage/shared` 代替 |
 | 用 `timeout` 命令 | macOS 与部分环境没有该命令，改用工具自带超时或 `gtimeout` |
 | 从终端进 `/tmp` | Termux 里没有 Linux 意义上的 `/tmp`；用 `$TMPDIR` 或 `$HOME` 下的路径 |
+| **用 Termux（SSH）建目录，再给手机上其它 App 用** | ⚠️ **陷阱**：Android 的 SAF 只对「**文件管理器创建的目录**」持久化授权 ✗ —— Termux 建的目录会让别的 App（实测 KeePassDX 报「访问被文件管理器撤销访问权限的文件」）出现「当场授权能打开、下次从 App 列表进就失效」。要建的目录请让用户用手机**文件管理器**建 ✓（2026-10-06 实测：把同步目录从 Termux 建的位置迁到文件管理器建的位置后一切正常）|
 
 **bash 中文/括号的坑**：`"$slug（中文说明）"` 会被 shell 当成变量名 `slug（中文说明` 去展开 —— 变量后面紧跟中文或括号时一律写成 `"${slug}（...）"`。
 
