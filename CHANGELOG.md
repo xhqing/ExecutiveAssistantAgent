@@ -2,6 +2,13 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 变更（tmp/codec-test/：在 VSCode 内出声的音频编码已实测确认）
+
+- **为什么改**：上一条（1.0.2）的结论以「三个样本的实测结果为准」收尾，用户随即在 VSCode 里实测反馈：两个 MP4 样本（H.264 + MP3、H.264 + FLAC）**都有声音** ✓——「在编辑器内预览带声视频」的可行方案就此确认（webm 样本未反馈，预期不可播：库内无 matroska demuxer）。
+- **改了什么**：回填实测结论，供以后参考——要在 VSCode 内预览出声，把音频转成 **MP3 或 FLAC 的 MP4**（视频流可 `-c:v copy` 无损保留：`ffmpeg -i 原.mp4 -c:v copy -c:a libmp3lame -b:a 128k 预览.mp4`，FLAC 换 `-c:a flac`）；原生 AAC 音轨的视频仍用系统播放器（QuickTime / IINA）看。
+
 ## [1.0.2] - 2026-10-08
 
 ### 新增（tmp/codec-test/：VSCode 内置播放器「有画面、没声音」的验证样本与排查结论）
