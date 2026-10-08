@@ -2,13 +2,20 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
-## [Unreleased]
+## [1.0.2] - 2026-10-08
 
 ### 新增（tmp/codec-test/：VSCode 内置播放器「有画面、没声音」的验证样本与排查结论）
 
 - **为什么改**：用户 2026-10-08 问「VSCode 里打开 MP4 播放时没有声音，播放器下面的喇叭按钮点了也没反应」，排查确认根因是 **VSCode 自带的媒体解码库（`libffmpeg.dylib`）不含 AAC 解码器**——AAC 属收费许可的编码，VSCode 出于版权费用考虑只带了一部分解码器（官方答复见 issue #167685 / #329811，多年未修、明确为产品性限制）。因此：视频轨是 H.264（库里有）能正常播画面，音轨是 AAC（库里没有）无法解码，播放器就成了「有画面、没声音」；本文件本身没问题（同一文件用 QuickTime 播放正常，音量实测 -24.7dB 正常电平）。这与文件、系统音量、播放器按钮都无关——喇叭按钮只是播放器标配控件，背后没有解码出来的声音可调。
 - **改了什么**：新建 `tmp/codec-test/`（gitignored，临时验证用）三个「视频流原样保留、只换音频编码」的样本：`mp3-audio.mp4`（H.264 + MP3）、`flac-audio.mp4`（H.264 + FLAC）、`vorbis-audio.webm`（VP8 + Vorbis），用于在 VSCode 里实测哪种音频编码能出声。
 - **排查依据（供后续复用）**：VSCode 的 `libffmpeg.dylib` 出口符号表里只有 flac / h264 / mp3 / pcm / vorbis / vp8 解码器（无 aac / opus / vp9 / av1 / hevc），容器只支持 flac / mov(MP4) / mp3 / ogg / wav / raw（**无 matroska，即 .webm 文件预计连画面都播不了**）；对照同机其他 Electron 应用（Lark、夸克网盘）的同类库则带 `_ff_aac_decoder` 与 matroska。预览带 AAC 的视频请用系统播放器（QuickTime / IINA）；若必须在编辑器内预览出声，可把音频转成 **MP3 或 FLAC 的 MP4**（视频流可 `-c:v copy` 无损保留）——webm 路线不可行（缺 demuxer），最终以三个样本的实测结果为准。
+
+### 变更（CHANGELOG 结构修复：补回 [1.0.1] 条目标题）
+
+- **为什么改**：上一条编辑（写入 tmp/codec-test 条目）时误删了 `## [1.0.1] - 2026-10-07` 标题行，导致 1.0.1 的变更条目落进待发布段、文件顶部最新实际版本标题错退到 `[1.0.0]`。
+- **改了什么**：补回 `## [1.0.1] - 2026-10-07` 标题行，termux-ssh 条目复归 1.0.1 段。
+
+## [1.0.1] - 2026-10-07
 
 ### 变更（termux-ssh skill：补一条 Android 存储授权陷阱）
 
