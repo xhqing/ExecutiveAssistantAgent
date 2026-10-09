@@ -33,4 +33,5 @@
 - **xhqing**（`/Users/xhq/Developer/xhqing`）：用户的 GitHub 个人主页仓库（github.com/xhqing/xhqing，README 中英双语 + 拟人名 Kit 署名），已同步（2026-08-10；本地路径 2026-09-06 实测更正——原记 `/Users/xhq/Documents/Projects/xhqing` 已不存在）
 - **CyberRipple**（`/Users/xhq/Developer/CyberRipple`）：组织总览仓库（组织架构图 / 名册 / 运转机制，README 中英双语；远程仓库待建），2026-09-08 用户交由 Kit 负责，接管时已落地超集（`.claude/CLAUDE.md`）并补齐项目标配（VERSION / CHANGELOG / .gitignore / LICENSE）
 - **blog**（`/Users/xhq/Developer/blog`）：个人博客仓库（docsify 静态博客，github.com/xhqing/blog，线上 xhqing.github.io/blog），2026-09-12 用户交由 Kit 负责，接管时已落地超集（`.claude/CLAUDE.md`）并补齐项目标配（VERSION / CHANGELOG；.gitignore / LICENSE 原已有）
+- **copybridge**（`/Users/xhq/Developer/copybridge`）：macOS 剪贴板桥接工具（在 VSCode 资源管理器复制的文件可直接粘贴到 Finder / 微信 / 浏览器等系统任意 App——后台修复 VSCode 私有剪贴板格式，repo github.com/xhqing/copybridge），2026-10-08 建立、2026-10-09 补登记
 
