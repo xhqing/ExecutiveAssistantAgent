@@ -2,12 +2,17 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
-## [Unreleased]
+## [1.0.4] - 2026-10-11
 
 ### 变更（子项目清单补登 copybridge）
 
 - **为什么改**：2026-10-09 核对团队仓库 Visitors 徽章数据源时发现，copybridge（2026-10-08 建立的 macOS 剪贴板桥接工具，repo xhqing/copybridge）虽已开源并配有完整规范文件，但一直未登记进本项目的子项目清单（全局注册表超集映射表同日一并补登）；其访问量采集列表登记（xhqing 仓库采集脚本）已随同日变更完成。
 - **改了什么**：`CLAUDE.md`「子项目清单」节在 blog 行后补一行 copybridge（macOS 剪贴板桥接工具；2026-10-08 建立、2026-10-09 补登记）；全局 `~/.claude/docs/agents-registry.md` 超集映射表同步加行（镜像同步记 CapabilityManagerAgent CHANGELOG）。
+
+### 变更（README 增补「快速响应」工作原则条目）
+
+- **为什么改**：README 的「工作原则」列表补充一条「快速响应」说明（琐碎、一次性的任务当场处理、不拖延），使原则列表与实际工作方式一致；本条为随 1.0.4 发版对 v1.0.3 之后入库改动的补记。
+- **改了什么**：`README.md` / `README_cn.md` 工作原则段各增加一条 bullet——英文 "**Fast turnaround.** Small, one-off tasks get handled on the spot, not deferred."、中文「**快速响应**。琐碎、一次性的活当场搞定，不拖到下次。」（中英语义一致）。
 
 ## [1.0.3] - 2026-10-08
 
