@@ -31,6 +31,7 @@
 
 - `language-partner` —— 找真人语言交换伙伴（语伴）：渠道选择、开场话术、安全注意
 - `termux-ssh` —— 通过 SSH 操作 Android 手机（Termux）：连手机、传与校验文件，以及踩坑清单（Termux 被冻结、手机 IP 会变、中文/空格路径、Android 沙箱限制）
+- `scroll-reverser` —— 维护 macOS 滚动方向工具 Scroll Reverser：使用、配置，以及方向失灵时的分级排查修复流程（睡眠唤醒、接外接屏、自动更新中断等场景）
 
 ## 约束
 

@@ -2,6 +2,14 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 新增（项目级 skill：scroll-reverser 由全局迁入，成为 Kit 专属 skill）
+
+- **为什么改**：2026-10-12 用户决定把 scroll-reverser skill 从全局通用能力（原先在 `~/.claude/skills/`、任何项目可用）转为本项目专属 skill——它维护的是本机这台 Mac 的滚动方向工具，归 EA 项目语义更贴切；迁移后不再占用全局能力、不再参与开源镜像同步链，后续维护随本仓库走。
+- **改了什么**：① 迁入 `.pi/skills/scroll-reverser/`（SKILL.md、references/guide.md、local/README.md 入库；本机数据 `local/config.md` 由 `.gitignore` 忽略、不进仓库）；`.gitignore` 新增「项目级 skill 本机数据子目录」忽略规则（`.pi/skills/*/local/*`，保留 `README.md` 作结构说明）。② 全局下线：`~/.claude/skills/scroll-reverser/` 与 `~/.pi/agent/skills/scroll-reverser/` 已删除；开源镜像（CapabilityManagerAgent）中同步移除（其侧变更另记于该仓库 CHANGELOG）。③ README 双版「Built-in skills / 内置能力」节各新增一条。
+- **验证**：迁移内容与源 diff 逐字节核验一致；`git check-ignore` 确认 `local/config.md` 被忽略、`local/README.md` 可入库。
+
 ## [1.0.5] - 2026-10-12
 
 ### 变更（临时测试文件归置：difftest.md 移入 tmp/）
