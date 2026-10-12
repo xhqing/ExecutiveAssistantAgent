@@ -33,6 +33,10 @@ TODO-archive.local.md
 # 只忽略目录一行，不写具体文件名：.gitignore 是公开文件，文件名即信息）
 backup/
 
+# 项目级 skill 的本机数据子目录（本机配置 / 快照等私有内容，不公开；仅保留 README.md 作结构说明）
+.pi/skills/*/local/*
+!.pi/skills/*/local/README.md
+
 # 本机密钥通用兜底（保留 .env.example）
 .env
 .env.*
