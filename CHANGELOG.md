@@ -2,6 +2,13 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 变更（临时测试文件归置：difftest.md 移入 tmp/）
+
+- **为什么改**：2026-10-12 收尾巡检发现项目根遗留一个未跟踪的 `difftest.md`（2026-10-11 22:26 的 /diff 面板显示效果测试文件、「第二轮测试」版），按「临时产物一律放 tmp/」规矩归位，让仓库根恢复干净。
+- **改了什么**：项目根 `difftest.md` → `tmp/difftest.md`（内容未动；tmp/ 中另有更早的同类测试文件 `tmp/diff-test.md`，两者并置备后续按需处置）。
+
 ## [1.0.4] - 2026-10-11
 
 ### 变更（子项目清单补登 copybridge）
