@@ -2,6 +2,14 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 新增（tmp/tokenplus_discount.py：tokenplus.cn 模型折扣期限查询脚本）
+
+- **为什么改**：2026-10-12 用户要求核实 tokenplus.cn 上「数据宝」服务商 DeepSeek V4.1 Flash 的优惠截止日期，并要一个可在终端自行反复运行的查询脚本；核查时发现「TokenPlus 优选」同款模型另有一条「v4.1最新优惠」也在有效期内，一并纳入脚本查询范围。
+- **改了什么**：新建 `tmp/tokenplus_discount.py`（gitignored 临时工具，纯标准库、无第三方依赖）——先经 `/portal/api/v1/models` 搜索模型取得 model_service_id，再取 `/portal/api/v1/models/{id}/channels` 中各服务商的实时价格与折扣期限，终端输出「数据宝」「TokenPlus 优选」两家的折扣标签与名称、原价→折后价（非缓存输入 / 缓存命中 / 输出）、优惠起止时间与当前状态（含剩余时长）。运行命令：`python3 tmp/tokenplus_discount.py`。
+- **验证**：2026-10-12 实测运行通过——数据宝「数据宝优惠」期限 2026-10-09 18:15 → 2026-11-01 00:00（北京时间）；TokenPlus 优选「v4.1最新优惠」期限 2026-10-11 14:33 → 2026-10-31 00:00（北京时间）。
+
 ## [1.1.0] - 2026-10-12
 
 ### 新增（项目级 skill：scroll-reverser 由全局迁入，成为 Kit 专属 skill）
