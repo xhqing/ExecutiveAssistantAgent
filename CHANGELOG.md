@@ -2,7 +2,7 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
-## [Unreleased]
+## [1.1.0] - 2026-10-12
 
 ### 新增（项目级 skill：scroll-reverser 由全局迁入，成为 Kit 专属 skill）
 
