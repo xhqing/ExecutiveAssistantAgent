@@ -2,6 +2,13 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 变更（子项目规则修订：子项目不再携带智能体专属文件；4 个子项目随附文件已清理）
+
+- **为什么改**：用户 2026-10-12 修订团队规则——智能体专属文件（`CLAUDE.md` / `AGENTS.md` / `.claude/` / 项目级 `.pi/`）从此只有 Agent 项目允许拥有，非 Agent 项目（含子项目）一律不得存在；后台开启 pi 会话（intercom / agent_call / agent_wake）只能以 Agent 项目根目录为工作目录。细则见全局 `~/.claude/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节。本项目 4 个子项目此前按旧「超集」规则随附了本项目的智能体专属文件，需按新规清理。
+- **改了什么**：① 本文件「子项目清单」节改为新规表述（去掉「`.claude/` 超集关系」，改为子项目不得携带智能体专属文件 + 后台会话以本项目根为工作目录）；② 清理 4 个子项目随附文件：xhqing `CLAUDE.md`、CyberRipple `.claude/CLAUDE.md`、blog `.claude/CLAUDE.md`、copybridge `CLAUDE.md` + `AGENTS.md`（均为本项目 CLAUDE.md 全文随附内容，删除无内容损失；各子项目 CHANGELOG 分别记录）。
+
 ## [1.1.1] - 2026-10-12
 
 ### 新增（tmp/tokenplus_discount.py：tokenplus.cn 模型折扣期限查询脚本）
