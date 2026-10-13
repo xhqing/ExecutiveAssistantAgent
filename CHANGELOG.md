@@ -2,6 +2,13 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 新增（子项目 xhs-mentor-scam：小红书陪跑反诈视频项目，独立私有仓库）
+
+- **为什么改**：用户 2026-10-13 指定——`tmp/video/` 下的视频项目材料新建独立 git 仓库并绑定 GitHub 私有远程（改动实时备份），项目归 Kit 负责。
+- **改了什么**：① 本项目 `AGENTS.md` / `CLAUDE.md` 的「子项目清单」节新增 `xhs-mentor-scam` 条目（与全局 `~/.claude/docs/agents-registry.md` 子项目映射表及 CapabilityManagerAgent 镜像同步一致；镜像同步记录见 CapabilityManagerAgent CHANGELOG）；② 视频项目材料就地建为独立 git 仓库（`tmp/video/`，含配音稿 / 分场脚本 / 分镜清单 / 工作流 / 编辑器扩展源码 + 仓库脚手架），仓库自身变更记该仓库 CHANGELOG。
+
 ## [1.1.4] - 2026-10-13
 
 ### 变更（删除 scroll-reverser 项目级 skill——本机已改用 macOS 自带滚动方向设置）
