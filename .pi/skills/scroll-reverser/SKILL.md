@@ -16,6 +16,10 @@ Scroll Reverser 是免费开源（Apache-2.0）的 macOS 工具，用来反转�
 
 已知设计限制（不是失灵，别去修）：手势型滚动界面（macOS 日历、iPhone Mirroring 等）无法被反转，手势方向跟随系统「自然滚动」设置。
 
+## 与系统自带「自然滚动」设置的关系
+
+macOS 自带「自然滚动」开关（系统设置 → 触控板 / 鼠标），但它是**全局单一开关**——两个面板读写同一个键（`com.apple.swipescrolldirection`），无法给触控板与鼠标分别设方向，这正是 SR 的存在价值。SR 的反转叠加在系统值之上，系统值被改会让方向整体翻转（与 SR 失灵同样表现）——排查失灵时必须连同系统值一起核对（见第 4a 步）。若用户不需要「两类设备方向不同」，也可完全改用系统自带设置（关掉自然滚动即可）+ 停用 SR。
+
 ## 失灵时的分级修复流程
 
 用户报「滚动方向反了 / 变回去了 / 失灵」时，按以下顺序诊断与修复。每步都有命令，修完一步先验证再进下一步。
@@ -32,7 +36,7 @@ pgrep -fl "Scroll Reverser"
 open -a "Scroll Reverser"
 ```
 
-若 `open -a` 找不到 app，说明安装位置特殊，去 `local/config.md`（本机应然配置）里拿本机安装路径。
+若 `open -a` 找不到 app，先读 `local/config.md`（本机应然配置）——它记录本机安装路径，也可能记录「本机已卸载 SR、改用系统自带设置」（如 2026-10-13 后的本机状态）：此时不要启动 app，直接改走系统设置路线，核对 `defaults read -g com.apple.swipescrolldirection` 的值并用系统设置 → 触控板 → 「自然滚动」调节。
 
 ### 第 2 步：主开关开着吗
 
@@ -54,9 +58,23 @@ defaults read com.pilotmoon.scroll-reverser
 
 对照 `local/config.md` 里的本机应然配置快照（用户惯用的开关组合）。发现某键被改掉 → 用 `defaults write` 恢复（键名含义见下方速查表），运行中的 app 在每个滚动事件里实时读取这些键，一般即时生效；未见生效就重启 app（第 5 步的命令）。
 
-### 第 4 步：都对但仍失灵 → toggle 重置（最高频解法）
+### 第 4 步：都对但仍失灵 → 先查系统自然滚动值，再 toggle 重置
 
-进程在、开关开、配置对，但方向就是不对——这是 gesture 事件流断掉的经典形态（睡眠唤醒、外接屏、macOS 26 偶发）。官方 ReleaseNotes v1.7.2 明说：停止工作时把 Scroll Reverser 关一下再开即可重置。一条命令完成：
+进程在、开关开、配置对，但方向就是不对——两种根因长得很像，按顺序排除：
+
+**4a. 系统侧：系统「自然滚动」值被改**。SR 的反转叠加在系统值之上，系统值一变方向整体翻转，现象与 SR 失灵一模一样（2026-10 实证：系统值被关，用户报「方向又反了」）。检查并与 `local/config.md` 的应然值比对：
+
+```bash
+defaults read -g com.apple.swipescrolldirection
+```
+
+与应然值不一致就写回：
+
+```bash
+defaults write -g com.apple.swipescrolldirection -bool true
+```
+
+**4b. SR 侧：gesture 事件流断掉的经典形态**（睡眠唤醒、外接屏、macOS 26 偶发）。官方 ReleaseNotes v1.7.2 明说：停止工作时把 Scroll Reverser 关一下再开即可重置。一条命令完成：
 
 ```bash
 osascript -e 'tell application id "com.pilotmoon.scroll-reverser" to set enabled to false' -e 'tell application id "com.pilotmoon.scroll-reverser" to set enabled to true'
