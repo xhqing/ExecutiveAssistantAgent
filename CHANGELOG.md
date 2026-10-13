@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 新增（项目级扩展 system-prompt-dump：导出当前完整系统提示词到 tmp/）
+
+- **为什么改**：2026-10-13 用户问「pi 默认的系统提示词文件在哪里」——查证发现默认提示词硬编码在 pi 安装包的构建产物里（`dist/core/system-prompt.js`），完整提示词是运行时拼装的（默认身份段 + 工具清单 + 内置规则 + 文档指引 + 项目上下文 + skills + cwd），平时没有现成文件可看。用户要求写一个小扩展导出「当前实际生效的完整系统提示词」，便于核对。
+- **改了什么**：① 新增项目级扩展 `.pi/extensions/system-prompt-dump.ts`——监听 `agent_start` 事件，把 `ctx.getSystemPrompt()` 的完整结果覆盖写入 `tmp/system-prompt.md`（写失败静默忽略、不阻塞会话）；② 已用 `pi -p` 实测：文件生成成功（80,907 字节、444 行），结构正确（preamble / tools / rules / docs / project_context / skills / cwd 齐全）。输出目录 `tmp/` 已被 .gitignore 忽略、不进 git。
+
 ### 新增（子项目 xhs-mentor-scam：小红书陪跑反诈视频项目，独立私有仓库）
 
 - **为什么改**：用户 2026-10-13 指定——`tmp/video/` 下的视频项目材料新建独立 git 仓库并绑定 GitHub 私有远程（改动实时备份），项目归 Kit 负责。
