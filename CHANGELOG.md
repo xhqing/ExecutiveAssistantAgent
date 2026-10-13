@@ -2,6 +2,13 @@
 
 本文件记录本项目（ExecutiveAssistantAgent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
+## [Unreleased]
+
+### 变更（删除 scroll-reverser 项目级 skill——本机已改用 macOS 自带滚动方向设置）
+
+- **为什么改**：2026-10-13 用户决定卸载 Scroll Reverser、改用系统自带「自然滚动」设置后（方向控制点只剩系统设置这一处），**用户明确指示删除该 skill**（原话：「这个 skill 可以删掉了，我知道在哪里设置了」）。skill 的维护对象已不存在，留着只会误导后续会话去查一个已卸载的第三方工具。
+- **改了什么**：① 删除 `.pi/skills/scroll-reverser/` 整个目录（SKILL.md、references/guide.md、local/README.md、local/config.md——如需回溯可在 git 历史中找回）；② README 双版「内置能力 / Built-in skills」列表同步移除 scroll-reverser 条目。
+
 ## [1.1.3] - 2026-10-13
 
 ### 变更（scroll-reverser skill：补系统「自然滚动」值排查；本机改用系统设置并卸载 SR）
