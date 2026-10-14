@@ -8,13 +8,16 @@
  * 落盘位置：项目根 tmp/input-llm-dump/ 下（tmp/ 已被 .gitignore 忽略，不会进 git；
  * 注意 dump 含完整对话内容，可能带敏感信息，不要往外拷）。
  *   - <本地时间戳>.json  每次请求一份，形如 2026-10-14T11-52-03-117.json，文件名可直接排序
- *   - latest.json        最近一次的副本，固定路径方便直接打开
+ *     （找最新一份：`ls -t tmp/input-llm-dump/*.json | head -1`）
  *
  * 说明：
  * - 时机为 before_provider_request（provider payload 组装完成、请求发出前），
  *   一次 HTTP 请求一份；重试、压缩摘要等附带调用也会各算一次。
  * - 写盘在后台排队、不阻塞请求；写失败静默忽略、不打扰正常对话。
- * - 默认保留全部历史 dump；如需限制数量，设环境变量 INPUT_LLM_DUMP_KEEP=<份数>。
+ * - 不写固定路径的「latest」副本：它每次请求都被重写，会被文件变更跟踪（ai-edit-diff）
+ *   反复判定为外部改动、刷屏变更通知并连锁触发新一轮请求（2026-10-14 实测踩坑，已去掉）。
+ * - 默认只保留最近 5 份（2026-10-14 用户定）；设环境变量 INPUT_LLM_DUMP_KEEP=<份数>
+ *   可改，<=0 或非数字表示不限量。
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
@@ -35,9 +38,9 @@ function localTimestamp(): string {
 	);
 }
 
-/** 可选的数量上限：设了 INPUT_LLM_DUMP_KEEP=<份数> 时，只保留最近 N 份时间戳 dump。 */
+/** 份数上限：默认保留最近 5 份（2026-10-14 用户定）；INPUT_LLM_DUMP_KEEP 可覆盖，<=0 / 非数字 = 不限。 */
 async function prune(outputDir: string): Promise<void> {
-	const keep = Number.parseInt(process.env[KEEP_ENV] ?? "", 10);
+	const keep = Number.parseInt(process.env[KEEP_ENV] ?? "5", 10);
 	if (!Number.isFinite(keep) || keep <= 0) return;
 
 	const entries = await readdir(outputDir);
@@ -48,7 +51,7 @@ async function prune(outputDir: string): Promise<void> {
 }
 
 export default function (pi: ExtensionAPI) {
-	// 写盘排队：多个请求挨在一起时，保证按先后顺序落盘、latest.json 始终是最新一份。
+	// 写盘排队：多个请求挨在一起时，保证按先后顺序落盘（时间戳文件名严格递增）。
 	let queue: Promise<void> = Promise.resolve();
 
 	pi.on("before_provider_request", (event, ctx) => {
@@ -74,7 +77,6 @@ export default function (pi: ExtensionAPI) {
 				}
 
 				await writeFile(filePath, text, "utf8");
-				await writeFile(join(outputDir, "latest.json"), text, "utf8");
 				await prune(outputDir);
 			} catch {
 				// 导出失败不阻塞会话（如 cwd 只读、磁盘满等），忽略即可
