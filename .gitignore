@@ -21,6 +21,10 @@ __pycache__/
 # 临时产物（见 .claude/rules/tmp-dir-for-artifacts.md）
 tmp/
 
+# 搜索工具忽略清单（fd / ripgrep / VS Code 搜索 / pi 的 find、grep 会读；本机文件——
+# 内容为放行 tmp/、让 pi 的 @ 补全能看到 tmp 目录；git 不读 .ignore，不影响 tmp/ 被忽略）
+/.ignore
+
 
 # 本地敏感变更记录（个人隐私类变更，不公开）
 CHANGELOG.local.md

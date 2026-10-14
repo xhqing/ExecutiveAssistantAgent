@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 新增（.ignore：让搜索类工具不忽略 tmp/，pi 的 @ 补全可见 tmp 目录）
+
+- **为什么改**：2026-10-14 用户反馈 pi 输入框输入 `@` 后搜不到 `tmp` 目录。查证：pi 的 `@` 模糊补全底层用 fd 搜索项目文件，fd 默认遵守 `.gitignore`，而 `tmp/` 正被本项目忽略，故不出现在补全列表。目标：补全能搜到 tmp 下的临时文件。
+- **改了什么**：① 新增 `.ignore`（内容 `!tmp/` 白名单）——`.ignore` 是 fd / ripgrep / VS Code 搜索 / pi 自带 find、grep 共同读取的搜索类工具忽略文件（ripgrep 生态约定，git 不读），该白名单只影响搜索类工具（不再跳过 tmp/），不影响 git（tmp/ 仍被 `.gitignore` 忽略、不会误提交）；② `.gitignore` 增加一行忽略 `/.ignore` 自身——属本机使用偏好，不进仓库、不改变其他 clone 者的搜索行为。已实测：fd 用 pi 的完整参数组合能搜到 `tmp/`，`git check-ignore tmp/` 仍命中 `.gitignore`，`git status` 看不到 `.ignore`。
+
 ### 变更（子项目 CyberRipple、blog 取消维护；本地项目资料删除）
 
 - **为什么改**：2026-10-14 用户决定——两个子项目取消、不再维护，本地项目资料删除；远端仓库保留为存档（CyberRipple 原未建远端仓库，其组织总览内容已并入 xhqing 主页 README；blog 的远端仓库与线上站点保留）。
