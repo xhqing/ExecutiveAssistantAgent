@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 变更（项目级扩展改为 input-llm-dump：每次请求全量导出输入 LLM 的内容）
+
+- **为什么改**：2026-10-14 用户指出 system-prompt-dump 只导出「系统提示词」，而每次请求输入 LLM 的还有完整对话历史、工具 schema、生成参数等——要看就得看每一次请求的全量输入。用户要求把扩展改造成 input-llm-dump：每次请求 dump 一次完整的输入内容。
+- **改了什么**：① 原 `.pi/extensions/system-prompt-dump.ts` 重命名并重写为 `.pi/extensions/input-llm-dump.ts`——监听 `before_provider_request`（provider payload 组装完成、请求发出前），把 payload 原样 JSON 落盘到 `tmp/input-llm-dump/`：每次请求一份 `<本地时间戳>.json`（如 `2026-10-14T11-52-03-117.json`），另写固定路径 `latest.json`；写盘排队、不阻塞请求，失败静默忽略；设 `INPUT_LLM_DUMP_KEEP=<份数>` 可只保留最近 N 份，默认不限；② 不再写 `tmp/system-prompt.md`（系统提示词已含在 payload 的 messages 里）；③ 已用 Node 模拟钩子实测：落盘内容与 payload 一致、同毫秒请求不覆盖、KEEP 裁剪正常。
+
 ### 新增（项目级扩展 system-prompt-dump：导出当前完整系统提示词到 tmp/）
 
 - **为什么改**：2026-10-13 用户问「pi 默认的系统提示词文件在哪里」——查证发现默认提示词硬编码在 pi 安装包的构建产物里（`dist/core/system-prompt.js`），完整提示词是运行时拼装的（默认身份段 + 工具清单 + 内置规则 + 文档指引 + 项目上下文 + skills + cwd），平时没有现成文件可看。用户要求写一个小扩展导出「当前实际生效的完整系统提示词」，便于核对。
