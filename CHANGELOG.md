@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+### 变更（子项目 CyberRipple、blog 取消维护；本地项目资料删除）
+
+- **为什么改**：2026-10-14 用户决定——两个子项目取消、不再维护，本地项目资料删除；远端仓库保留为存档（CyberRipple 原未建远端仓库，其组织总览内容已并入 xhqing 主页 README；blog 的远端仓库与线上站点保留）。
+- **改了什么**：① 本项目 `CLAUDE.md`（`AGENTS.md` 为其符号链接）「子项目清单」节移除 CyberRipple、blog 两条目，并加一行「已取消」说明；② 本地删除 `~/Developer/blog` 目录（删除前已核验干净且全部提交已推送；线上站点由 GitHub 托管、不受本地删除影响）；CyberRipple 本地目录暂留——其原未建远端仓库，备份方式（是否新建远端）待用户确认后再处理；③ 全局注册表 `agents-registry.md` 对应行同步删除（镜像同步记录见 CapabilityManagerAgent CHANGELOG）。
+
+### 变更（xhs-mentor-scam 路径引用更正：仓库已移出本项目 tmp/video）
+
+- **为什么改**：xhs-mentor-scam 仓库 2026-10-14 已从本项目 `tmp/video` 移至 `~/Developer/xhs-mentor-scam`（移库动作与脚本 / plist 路径修正记于该仓库自身 CHANGELOG），本项目侧与全局注册表中的路径引用未同步更正，属陈旧文档。
+- **改了什么**：① 本项目 `CLAUDE.md`「子项目清单」节中 xhs-mentor-scam 条目的路径更新为 `/Users/xhq/Developer/xhs-mentor-scam`（标注移出 `tmp/`）；② 全局注册表对应行同步更正（镜像同步记录见 CapabilityManagerAgent CHANGELOG）。
+
 ### 修复（input-llm-dump：去掉每次重写的 latest.json、默认只留 5 份）
 
 - **为什么改**：2026-10-14 测试发现 `latest.json` 每次请求都被重写，而它被 ai-edit-diff 的变更跟踪盯上，形成「重写 → 变更通知 → 通知触发新一轮请求 → 再次重写」的自我循环（每一轮都是真实模型调用；用户明确反馈「为什么还不停」）。另：此前定的「保留 5 份」没能进入运行中的 pi 进程（环境变量需进程重启才生效），dump 一直不限量。
