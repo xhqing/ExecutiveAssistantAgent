@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 修复（input-llm-dump：去掉每次重写的 latest.json、默认只留 5 份）
+
+- **为什么改**：2026-10-14 测试发现 `latest.json` 每次请求都被重写，而它被 ai-edit-diff 的变更跟踪盯上，形成「重写 → 变更通知 → 通知触发新一轮请求 → 再次重写」的自我循环（每一轮都是真实模型调用；用户明确反馈「为什么还不停」）。另：此前定的「保留 5 份」没能进入运行中的 pi 进程（环境变量需进程重启才生效），dump 一直不限量。
+- **改了什么**：① `.pi/extensions/input-llm-dump.ts` 去掉写 `latest.json`（找最新一份改用 `ls -t tmp/input-llm-dump/*.json | head -1`），从源头断掉循环；② `prune()` 默认值改为保留最近 5 份（`INPUT_LLM_DUMP_KEEP` 仍可覆盖，<=0 / 非数字 = 不限），`/reload` 后即生效、无需重启进程；③ 应急：已把现存 `latest.json` 置为只读（chmod 444）先止住写入循环，`/reload` 加载新代码后该陈旧文件可直接删除。
+
 ### 变更（项目级扩展改为 input-llm-dump：每次请求全量导出输入 LLM 的内容）
 
 - **为什么改**：2026-10-14 用户指出 system-prompt-dump 只导出「系统提示词」，而每次请求输入 LLM 的还有完整对话历史、工具 schema、生成参数等——要看就得看每一次请求的全量输入。用户要求把扩展改造成 input-llm-dump：每次请求 dump 一次完整的输入内容。
