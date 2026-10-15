@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（xhs-mentor-scam 移交 Gatsby：从本项目子项目清单移出）
+
+- **为什么改**：2026-10-15 用户决定把小红书「陪跑 / 带教」反诈视频项目（xhs-mentor-scam）交给 Gatsby 负责、作为其子项目。该视频主题落在小红书阵地、最终用途为引流私域社群，由负责社媒矩阵与私域阵地的 Gatsby 接手更顺；Kit 作为多面手不再兼管该项目。
+- **改了什么**：① 本项目 `CLAUDE.md`（`AGENTS.md` 为其符号链接）「子项目清单」节——xhs-mentor-scam 条目移出，改记一行「已移交（2026-10-15 用户决定，转由 Gatsby 负责）」说明；② 全局注册表 `agents-registry.md`「子项目映射」表——该行从 `ExecutiveAssistantAgent（Kit）` 移至 `SocialMediaManagerAgent（Gatsby）`（镜像同步记录见 CapabilityManagerAgent CHANGELOG）；③ 接收侧登记：Gatsby 项目 `CLAUDE.md` 新增「子项目清单」节登记该项目；已 agent_call 通知 Gatsby 交接。
+- **移交边界**：仓库位置（`~/Developer/xhs-mentor-scam`）与备份机制（私有远程 + launchd 自动提交推送）保持不变，仅负责方变更；后续该项目工作由 Gatsby 按其流程推进。
+
 ### 新增（会话卫生：乱码空转的后台会话直接关闭、事后汇报）
 
 - **为什么改**：2026-10-14 用户立规。当天遇到一个生成故障的 pi 后台会话（pi-Atlas：多轮输出大面积重复乱码、空转无有效动作），处理时先向用户请示才关闭，属多余确认——用户明确「下次遇见这种乱码空转的会话直接关掉，不需要问我，关掉之后向我汇报就行」，把这类会话的处置固化为免确认动作。
