@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 变更（Agent↔子项目关系网络：子项目挂 AGENTS.md / .pi 软链接，规则更新为 2026-10-17 版）
+
+- **为什么改**：用户 2026-10-17 决定把 Agent 与子项目的关系从「子项目不得存在智能体专属文件」（2026-10-12 规则）改为「Agent 进驻子项目」网络：智能体专属文件的实体只在 Agent 项目，子项目根目录挂两条指回负责 Agent 的相对路径软链接（`AGENTS.md`、`.pi`），随仓库提交——在子项目目录直接开会话即继承负责 Agent 的身份 / 规则 / 技能；后台开启 / 唤醒会话仍限定 Agent 项目根目录。起因：团队整体是一个大项目、GitHub 上只是分仓库存放，跨仓库关联是网络的组成部分；仓库主要作用户本人备份。
+- **改了什么**：① 本项目 `CLAUDE.md`（`AGENTS.md` 为其符号链接）「子项目清单」节措辞更新为 2026-10-17 版；② 两个子项目（xhqing、copybridge）根目录新增 `AGENTS.md → ../ExecutiveAssistantAgent/AGENTS.md`、`.pi → ../ExecutiveAssistantAgent/.pi` 两条软链接（随各仓库提交）；③ 全局规则同步：`~/.claude/CLAUDE.md`、`~/.claude/docs/agents-registry.md`、`~/.claude/docs/new-agent-scaffold.md`、`~/.pi/agent/extensions/agent-call.ts`（目录校验改按注册表、支持 session-id 定位）——镜像同步记录见 CapabilityManagerAgent CHANGELOG。
+
 ### 变更（xhs-mentor-scam 移交 Gatsby：从本项目子项目清单移出）
 
 - **为什么改**：2026-10-15 用户决定把小红书「陪跑 / 带教」反诈视频项目（xhs-mentor-scam）交给 Gatsby 负责、作为其子项目。该视频主题落在小红书阵地、最终用途为引流私域社群，由负责社媒矩阵与私域阵地的 Gatsby 接手更顺；Kit 作为多面手不再兼管该项目。
