@@ -29,10 +29,10 @@
 
 ## 子项目清单
 
-本项目负责的子项目如下（与全局 `~/.claude/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-12 用户修订的新规：智能体专属文件（`CLAUDE.md` / `AGENTS.md` / `.claude/` / 项目级 `.pi/`）只有 Agent 项目允许拥有，子项目一律不得存在；后台开启 pi 会话只能以本 Agent 项目根目录为工作目录**（细则见全局 `~/.claude/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节）。子项目的工作一律在本项目会话里按路径跨目录操作。
+本项目负责的子项目如下（与全局 `~/.claude/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-17 用户修订的规则：智能体专属文件的实体只在 Agent 项目；子项目根目录挂 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）——在子项目目录开会话即继承 Kit 的身份与规则（Agent 进驻子项目）；后台开启 pi 会话仍只能以本 Agent 项目根目录为工作目录**（细则见全局 `~/.claude/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节）。子项目的工作在本项目会话里按路径跨目录操作。
 
-- **xhqing**（`/Users/xhq/Developer/xhqing`）：用户的 GitHub 个人主页仓库（github.com/xhqing/xhqing，README 中英双语 + 拟人名 Kit 署名）；2026-10-12 按新规清理随附的智能体专属文件（`CLAUDE.md`）
-- **copybridge**（`/Users/xhq/Developer/copybridge`）：macOS 剪贴板桥接工具（在 VSCode 资源管理器复制的文件可直接粘贴到 Finder / 微信 / 浏览器等系统任意 App——后台修复 VSCode 私有剪贴板格式，repo github.com/xhqing/copybridge），2026-10-08 建立、2026-10-09 补登记；2026-10-12 按新规清理随附的智能体专属文件（`CLAUDE.md` / `AGENTS.md`）
+- **xhqing**（`/Users/xhq/Developer/xhqing`）：用户的 GitHub 个人主页仓库（github.com/xhqing/xhqing，README 中英双语 + 拟人名 Kit 署名）；2026-10-17 挂上 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
+- **copybridge**（`/Users/xhq/Developer/copybridge`）：macOS 剪贴板桥接工具（在 VSCode 资源管理器复制的文件可直接粘贴到 Finder / 微信 / 浏览器等系统任意 App——后台修复 VSCode 私有剪贴板格式，repo github.com/xhqing/copybridge），2026-10-08 建立、2026-10-09 补登记；2026-10-17 挂上 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
 - **已移交（2026-10-15 用户决定，转由 Gatsby 负责）**：xhs-mentor-scam——小红书「陪跑 / 带教」反诈视频项目材料（2026-10-13 由本项目设立，2026-10-14 由本项目 `tmp/video` 移出为独立仓库、绑定私有远程 `xhqing/xhs-mentor-scam`）；视频最终用途为引流私域社群，与 Gatsby 的社媒 / 私域阵地直接相关，2026-10-15 起归 SocialMediaManagerAgent（Gatsby）作为子项目管理（见全局注册表「子项目映射」表）
 - **已取消（2026-10-14 用户决定，不再维护）**：CyberRipple、blog——blog 本地资料已删除（远端仓库与线上站点保留）；CyberRipple 本地目录暂留、备份方式待用户确认（原未建远端仓库，其组织总览内容已并入 xhqing 主页 README）
 
