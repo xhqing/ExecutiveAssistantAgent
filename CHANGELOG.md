@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 新增（子项目 diff-bridge：pi 改动可视化的 VSCode 侧助手；全局 ai-edit-diff 新增 /open-diff、/close-diff 命令）
+
+- **为什么改**：用户 2026-10-18 需求——把 diff 的「打开 / 关闭」做成可直接键入的命令（`/open-diff`、`/close-diff`），并指出启用提示文案缺字。关闭 diff 标签在 VSCode 没有官方外部接口（`code` CLI 无子命令、AppleScript 查不了 VSCode 窗口、UI 脚本会抢焦点），因此新建一个 VSCode 侧助手扩展承接关闭动作：pi 写「关闭请求」文件，扩展在 VSCode 内部静默执行并回写确认。
+- **改了什么**：① 新建子项目 **diff-bridge**（`~/Developer/diff-bridge`；本地项目、尚未开源）——每 1 秒轮询 pi 的请求目录、只关闭「左侧 = pi 改动前快照」的 diff 标签（`preserveFocus` 不抢焦点）、回写确认；已本地打包 vsix 并安装到 VSCode（`xhqing.diff-bridge`），`AGENTS.md` / `.pi` 两条指回本项目的软链接已挂。② 全局 pi 扩展 `~/.pi/agent/extensions/ai-edit-diff.ts` 新增 `/open-diff`、`/close-diff` 用户命令与 `close_diff` 工具（打开流程抽成共用函数，命令与工具同一套），并修提示文案缺字（「正在干活的会话**会**收到」）——镜像同步与记录见 CapabilityManagerAgent CHANGELOG。③ 全局注册表「子项目映射」表与本文件「子项目清单」同步登记新子项目。
+- **验证**：VSCode 侧用「vscode 模块桩」跑通四条场景（关闭全部 / 按路径过滤 / 陈旧请求不执行 / 非法请求不崩）；pi 侧用「桩 pi API + esbuild 即时编译」跑通五条（工具与命令注册 / `/open-diff` 空候选提示 / `/close-diff` 写请求与等待确认 / 带路径解析 / `close_diff` 模拟确认回报）；正式测试用例归测试 Agent（Hopper），尚未出题。
+
 ### 变更（Agent↔子项目关系网络：子项目挂 AGENTS.md / .pi 软链接，规则更新为 2026-10-17 版）
 
 - **为什么改**：用户 2026-10-17 决定把 Agent 与子项目的关系从「子项目不得存在智能体专属文件」（2026-10-12 规则）改为「Agent 进驻子项目」网络：智能体专属文件的实体只在 Agent 项目，子项目根目录挂两条指回负责 Agent 的相对路径软链接（`AGENTS.md`、`.pi`），随仓库提交——在子项目目录直接开会话即继承负责 Agent 的身份 / 规则 / 技能；后台开启 / 唤醒会话仍限定 Agent 项目根目录。起因：团队整体是一个大项目、GitHub 上只是分仓库存放，跨仓库关联是网络的组成部分；仓库主要作用户本人备份。
