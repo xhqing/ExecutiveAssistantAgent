@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（引用更名：全局 pi 扩展 ai-edit-diff → diff-view）
+
+- **为什么改**：2026-10-18 用户指出原名不严谨——「ai-edit-diff」把范围说窄成「AI 编辑产生的 diff」，而用户手改同样产生 diff；该扩展的实际定位是「独立于 git 的文件内容 diff 视图」，据此更名为 `diff-view.ts`。
+- **改了什么**：① 本项目 `CLAUDE.md`（`AGENTS.md` 为符号链接）「子项目清单」diff-bridge 行的扩展名引用更新；② `.pi/extensions/input-llm-dump.ts` 注释里的跟踪器名更新；③ 子项目 `diff-bridge` 仓库内 README 双语 / `extension.js` 注释 / CHANGELOG 同步（该仓库自行提交）。
+- **说明**：全局扩展的改名本体、镜像同步与记录见 CapabilityManagerAgent CHANGELOG（由 Prometheus 提交）；pi 状态目录 `state/ai-edit-diff/` 与环境变量名保持不动（已装的 diff-bridge 指向它们，改了会打断协作）。
+
 ### 新增（子项目 diff-bridge：pi 改动可视化的 VSCode 侧助手；全局 ai-edit-diff 新增 /open-diff、/close-diff 命令）
 
 - **为什么改**：用户 2026-10-18 需求——把 diff 的「打开 / 关闭」做成可直接键入的命令（`/open-diff`、`/close-diff`），并指出启用提示文案缺字。关闭 diff 标签在 VSCode 没有官方外部接口（`code` CLI 无子命令、AppleScript 查不了 VSCode 窗口、UI 脚本会抢焦点），因此新建一个 VSCode 侧助手扩展承接关闭动作：pi 写「关闭请求」文件，扩展在 VSCode 内部静默执行并回写确认。
