@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（子项目 diff-bridge 整合更名 diff-view：pi 侧 + VSCode 侧两个组件）
+
+- **为什么改**：2026-10-18 用户决定——pi 侧扩展与 VSCode 侧扩展本是一个功能，应放同一个项目；项目定名 `diff-view`，下设两个组件（`diff-view-pie`、`diff-view-vsce`），两个都安装才是完整功能，README 说明清楚。
+- **改了什么**：① 子项目 `~/Developer/diff-bridge` → `~/Developer/diff-view`，拆为 `diff-view-pie/`（pi 侧扩展源）+ `diff-view-vsce/`（VSCode 侧扩展，扩展身份 `xhqing.diff-bridge` → `xhqing.diff-view-vsce`）；② 新增 `install.sh`（一次安装两组件）；README 双语重写、logo 更名、VERSION 0.1.0 → 0.2.0；③ 本项目 `CLAUDE.md`「子项目清单」行同步更名；④ 全局注册表与 CapabilityManagerAgent 镜像同步（后者记录见其 CHANGELOG）。
+- **说明**：全局 pi 扩展（`~/.pi/agent/extensions/diff-view.ts`）的源头此后在项目仓库，全局那份是 install.sh 部署副本；内部协议路径（`state/ai-edit-diff/`、`AI_EDIT_DIFF_*`）有意保留不动。
+
 ### 变更（引用更名：全局 pi 扩展 ai-edit-diff → diff-view）
 
 - **为什么改**：2026-10-18 用户指出原名不严谨——「ai-edit-diff」把范围说窄成「AI 编辑产生的 diff」，而用户手改同样产生 diff；该扩展的实际定位是「独立于 git 的文件内容 diff 视图」，据此更名为 `diff-view.ts`。
