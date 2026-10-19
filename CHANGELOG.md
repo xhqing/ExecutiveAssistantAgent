@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（子项目 diff-view 开源到 GitHub 并发布 v0.2.0）
+
+- **为什么改**：2026-10-19 用户指示「开源到 gh」，并定义构建产物——**唯一**产物为一个 zip（内含 vsix 与 pi 扩展文件，两个组件共用同一版本号）。
+- **改了什么**：① 公开仓库 `github.com/xhqing/diff-view`（About 双语 description + topics、CI workflow 就位）；② 新增 `build.sh` 产出唯一产物 `dist/diff-view-<version>.zip`（内含 `diff-view-vsce-<version>.vsix` + `diff-view.ts`）、`install.sh` 改从产物安装；③ 发布 `v0.2.0`（Release 附产物 zip）；④ 本项目「子项目清单」行与全局注册表同步更新为「已开源」。
+- **说明**：项目内细节记录见 diff-view 仓库 CHANGELOG；全局注册表与镜像同步记录见 CapabilityManagerAgent CHANGELOG。
+
 ### 变更（子项目 diff-bridge 整合更名 diff-view：pi 侧 + VSCode 侧两个组件）
 
 - **为什么改**：2026-10-18 用户决定——pi 侧扩展与 VSCode 侧扩展本是一个功能，应放同一个项目；项目定名 `diff-view`，下设两个组件（`diff-view-pie`、`diff-view-vsce`），两个都安装才是完整功能，README 说明清楚。
