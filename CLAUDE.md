@@ -34,6 +34,7 @@
 - **xhqing**（`/Users/xhq/Developer/xhqing`）：用户的 GitHub 个人主页仓库（github.com/xhqing/xhqing，README 中英双语 + 拟人名 Kit 署名）；2026-10-17 挂上 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
 - **copybridge**（`/Users/xhq/Developer/copybridge`）：macOS 剪贴板桥接工具（在 VSCode 资源管理器复制的文件可直接粘贴到 Finder / 微信 / 浏览器等系统任意 App——后台修复 VSCode 私有剪贴板格式，repo github.com/xhqing/copybridge），2026-10-08 建立、2026-10-09 补登记；2026-10-17 挂上 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
 - **diff-view**（`/Users/xhq/Developer/diff-view`）：pi「改动可视化」完整套件（两组件都装才完整：**diff-view-pie**＝pi 侧扩展（源码在项目内、`install.sh` 部署到 `~/.pi/agent/extensions/`）、**diff-view-vsce**＝VSCode 侧扩展（打包 vsix 安装）；提供 diff 的按需打开与静默关闭）；已开源（github.com/xhqing/diff-view，2026-10-19 发布 v0.2.0）。2026-10-18 建立（原名 diff-bridge，同日按用户决定整合更名），同期挂 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
+- **ark-key-pool**（`/Users/xhq/Developer/ark-key-pool`）：pi 的火山方舟 Agent Plan 多 Key 自动切换扩展（两个不同账号的 Key 组成池，额度耗尽 / Key 失效时自动切下一个；冷却状态跨进程共享；`install.sh` 部署到 `~/.pi/agent/extensions/`）；2026-10-22 建立，由 Kit 负责，挂 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）；已开源 github.com/xhqing/ark-key-pool（2026-10-22，v0.1.0）
 - **已移交（2026-10-15 用户决定，转由 Gatsby 负责）**：xhs-mentor-scam——小红书「陪跑 / 带教」反诈视频项目材料（2026-10-13 由本项目设立，2026-10-14 由本项目 `tmp/video` 移出为独立仓库、绑定私有远程 `xhqing/xhs-mentor-scam`）；视频最终用途为引流私域社群，与 Gatsby 的社媒 / 私域阵地直接相关，2026-10-15 起归 SocialMediaManagerAgent（Gatsby）作为子项目管理（见全局注册表「子项目映射」表）
 - **已取消（2026-10-14 用户决定，不再维护）**：CyberRipple、blog——blog 本地资料已删除（远端仓库与线上站点保留）；CyberRipple 本地目录暂留、备份方式待用户确认（原未建远端仓库，其组织总览内容已并入 xhqing 主页 README）
 

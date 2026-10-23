@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+### 新增（子项目 ark-key-pool：pi 的火山方舟 Agent Plan 多 Key 自动切换扩展）
+
+- **为什么改**：2026-10-22 用户需求——火山方舟 Agent Plan 有两个不同账号的 Key，希望一个不能用时自动切换另一个。pi 原生一个 provider 只能存一份凭证、也没有故障切换；Agent Plan 额度耗尽返回 429 `AccountQuotaExceeded`、Key 失效返回 401，原生只会用同一个 Key 重试。用户随后要求把它独立成一个项目由 Kit 负责。
+- **改了什么**：① 新建子项目 **ark-key-pool**（`~/Developer/ark-key-pool`，已开源 github.com/xhqing/ark-key-pool、发布 v0.1.0）：扩展源码、`install.sh`、中英双语 README、CHANGELOG / VERSION / LICENSE、`assets/logo.svg`、`verify/` 下本地 mock 与四场景验证脚本；挂 `AGENTS.md` / `.pi` 两条指回本项目的软链接。② 本项目「子项目清单」与全局注册表「子项目映射」表同步登记。③ 扩展本体同时部署在全局 `~/.pi/agent/extensions/ark-key-pool.ts`（install.sh 的部署副本），CapabilityManagerAgent 镜像同步见其 CHANGELOG。
+- **验证**：本地 mock 四场景全过（正常 / 额度耗尽切换 / Key 失效切换 / 两个都耗尽），跨进程冷却共享与冷却到期恢复另测通过，全程零真实额度消耗。
+- **说明**：扩展的配置 `~/.pi/agent/ark-agent-plan-keys.json` 含真实凭证、仅本机，不入仓库；模板里的占位符会被扩展过滤，不会当真实 Key 发请求。项目已按用户指示提交并开源（2026-10-22），首个 Release 为 v0.1.0。
+
 ### 变更（子项目 diff-view 开源到 GitHub 并发布 v0.2.0）
 
 - **为什么改**：2026-10-19 用户指示「开源到 gh」，并定义构建产物——**唯一**产物为一个 zip（内含 vsix 与 pi 扩展文件，两个组件共用同一版本号）。
