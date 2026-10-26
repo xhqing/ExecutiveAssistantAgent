@@ -29,7 +29,18 @@
 
 ## 子项目清单
 
-本项目负责的子项目如下（与全局 `~/.claude/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-17 用户修订的规则：智能体专属文件的实体只在 Agent 项目；子项目根目录挂 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）——在子项目目录开会话即继承 Kit 的身份与规则（Agent 进驻子项目）；后台开启 pi 会话仍只能以本 Agent 项目根目录为工作目录**（细则见全局 `~/.claude/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节）。子项目的工作在本项目会话里按路径跨目录操作。
+本项目负责的子项目如下（与全局 `~/.pi/agent/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-17 用户修订的规则：智能体专属文件的实体只在 Agent 项目；子项目根目录挂 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）——在子项目目录开会话即继承 Kit 的身份与规则（Agent 进驻子项目）；后台开启 pi 会话仍只能以本 Agent 项目根目录为工作目录**（细则见全局 `~/.pi/agent/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节）。子项目的工作在本项目会话里按路径跨目录操作。
+
+### 名册同步职责（2026-10-26 用户立，硬性规定 + 工具强制）
+
+`xhqing` 主页 README 里那张团队名册表格（「Subprojects (🌐 public · 🔒 private)」）是**本项目负责维护的对外名册**，它的权威来源是全局 `~/.pi/agent/docs/agents-registry.md` 的两张表（智能体命名注册表 + 子项目映射）。两条职责：
+
+1. **别人改了 registry，本会话同批补齐**：任何 agent（含我自己）改动 registry——新增 / 删除 Agent 项目、子项目新增 / 删除 / 归属变更、Agent 迁机——都必须在**同一批改动里**把 `xhqing` 的英文 `README.md` 与中文 `README_cn.md` 两份名册改齐（双语文档同步，内容语义对齐），不留到「下次顺手改」。改动 registry 的那个会话有责任补齐或当场交给本会话处理。
+2. **我自己发现的漂移，立刻查补**：每轮收尾前顺手跑一次 `python3 ~/.pi/agent/patch/roster-sync/roster-sync-check.py`，缺的（registry 有、README 无）与多的（README 有、registry 无）都补/删；补完走本项目 `/add` → `/commit` → 推送。
+
+- **公开描述语先问用户**：某仓库（尤其私有仓库）在公开 README 上怎么写、用哪些词，要先取得用户认可；没认可的就不写，先进 `~/.pi/agent/patch/roster-sync/allowlist.json` 登记豁免（repo + 理由 + 日期），用户确认后再写进 README 并把豁免删掉。
+- **Host machine 列手工同步**：脚本只比名字集合，不查 Host 列——registry 的宿主机归属变了（如 2026-10-26 Mark 从 macmini 迁回本机），README 里对应 Agent 的 Host 列要手工改。
+- **工具强制**：pi 端扩展 `~/.pi/agent/extensions/roster-sync-guard.ts`——写到 registry 后立即比对并当场插话；每轮收尾（`agent_settled`）在 Kit 会话里再兜底提醒一次。规则原文见全局 `~/.pi/agent/docs/agents-registry.md`「名册同步」节。
 
 - **xhqing**（`/Users/xhq/Developer/xhqing`）：用户的 GitHub 个人主页仓库（github.com/xhqing/xhqing，README 中英双语 + 拟人名 Kit 署名）；2026-10-17 挂上 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
 - **copybridge**（`/Users/xhq/Developer/copybridge`）：macOS 剪贴板桥接工具（在 VSCode 资源管理器复制的文件可直接粘贴到 Finder / 微信 / 浏览器等系统任意 App——后台修复 VSCode 私有剪贴板格式，repo github.com/xhqing/copybridge），2026-10-08 建立、2026-10-09 补登记；2026-10-17 挂上 `AGENTS.md` / `.pi` 两条指回本项目的软链接（随仓库提交）
