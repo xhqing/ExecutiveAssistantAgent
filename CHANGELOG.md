@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+### 新增（名册同步规矩落地：规则写进项目 `CLAUDE.md` + 全局注册表 + 机器校验工具）
+
+- **为什么改**：用户 2026-10-26 立规（由 Victor 转达）——全局 `agents-registry.md` 的任何改动必须**同一批**同步到 `xhqing` 主页 README 名册；立规当天核实发现名册已漂三处（Kit 名下 diff-view / ark-key-pool 未登记、Atlas 的 pi 已改名为 pi-harness、Mark 已迁回本机但 Host 列还写 Mac mini）。按团队元规则「规矩必须配套工具强制」，同时做两项落地：规则写进文档 + 写一个集合比对脚本挂进收尾流程。
+- **改了什么**（2026-10-26，Kit 会话）：① 本项目 `CLAUDE.md`（`AGENTS.md` 软链接指向它）「子项目清单」节新增「名册同步职责」小节——底座规则、公开描述语先问用户、Host 列手工同步、工具强制入口；顺带把该节里过时的全局路径 `~/.claude/docs/agents-registry.md` 改成现行的 `~/.pi/agent/docs/agents-registry.md`。② 全局 `~/.pi/agent/docs/agents-registry.md` 「子项目映射」表下方新增「名册同步（2026-10-26 用户立，硬性规定 + 工具强制）」节（权威规则原文）。③ 新增机器校验：`~/.pi/agent/patch/roster-sync/roster-sync-check.py`（registry 两张表 ↔ 中英两份 README 名册的集合比对，缺 / 多都报，`allowlist.json` 登记待用户确认的有意豁免，退出码 1 表示有漂移）+ `~/.pi/agent/extensions/roster-sync-guard.ts`（写到 registry 后立即比对并当场插话；每轮收尾 `agent_settled` 兜底；Kit 会话注入提醒、其它会话只弹通知）。④ 修正本项目子项目 `xhqing` 的 README 名册三处漂移（详见 xhqing 仓库 CHANGELOG）。
+- **验证**：脚本正向（当前名册）退出码 0、只报豁免的 NewsScoreStudy；负向（关豁免）能准确报出缺项；故意删掉 diff-view 行能报「缺子项目」；扩展在模拟环境注册 3 个钩子并验证「写入 registry → 插话 / 去重 / 无关写入不触发 / 非 Kit 会话不插话」四条路径。
+
+
 ### 新增（子项目 ark-key-pool：pi 的火山方舟 Agent Plan 多 Key 自动切换扩展）
 
 - **为什么改**：2026-10-22 用户需求——火山方舟 Agent Plan 有两个不同账号的 Key，希望一个不能用时自动切换另一个。pi 原生一个 provider 只能存一份凭证、也没有故障切换；Agent Plan 额度耗尽返回 429 `AccountQuotaExceeded`、Key 失效返回 401，原生只会用同一个 Key 重试。用户随后要求把它独立成一个项目由 Kit 负责。
