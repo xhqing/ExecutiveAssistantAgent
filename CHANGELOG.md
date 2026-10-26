@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.1.5] - 2026-10-26
+
 ### 新增（名册同步规矩落地：规则写进项目 `CLAUDE.md` + 全局注册表 + 机器校验工具）
 
 - **为什么改**：用户 2026-10-26 立规（由 Victor 转达）——全局 `agents-registry.md` 的任何改动必须**同一批**同步到 `xhqing` 主页 README 名册；立规当天核实发现名册已漂三处（Kit 名下 diff-view / ark-key-pool 未登记、Atlas 的 pi 已改名为 pi-harness、Mark 已迁回本机但 Host 列还写 Mac mini）。按团队元规则「规矩必须配套工具强制」，同时做两项落地：规则写进文档 + 写一个集合比对脚本挂进收尾流程。
