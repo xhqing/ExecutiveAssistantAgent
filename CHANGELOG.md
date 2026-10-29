@@ -4,6 +4,17 @@
 
 ## [Unreleased]
 
+### 变更（子项目 `.pi` 由软链接改为真实目录 + 资源引用：全局规矩 2026-10-30 修订，本批落本项目与 5 个子项目）
+
+- **为什么改**：用户 2026-10-30 提问「子项目的 `.pi` / `AGENTS.md` 与负责它的智能体保持一致好，还是做超集好（上一版曾是超集）」，并指出最近又碰到「子项目需要独有的配置要放进 `.pi`」。核查后确认根因：`.pi` **整目录软链接**把「共享」和「独占」压在了同一个符号上——子项目要放自己的配置时无处安放，硬写进 `.pi` 等于直接写进 Agent 项目，会瞬间影响全部兄弟子项目并进入 Agent 仓库的 git 历史；而 pi 的上下文文件（`AGENTS.md`）**没有 include / 导入机制**，超集只能靠复制、复制必然漂移。于是定为**分层**：身份层保持一致（软链接），能力层做超集但用「引用 + 追加」实现。
+- **改了什么**：
+  1. 本项目 `CLAUDE.md`（`AGENTS.md` 软链接指向它）「子项目清单」节与 5 个子项目条目：把「2026-10-17 挂 `AGENTS.md` / `.pi` 两条软链接」改为新形态（`AGENTS.md` 软链接 + 真实 `.pi/` 目录含 `settings.json` 资源引用）。
+  2. 名下 5 个子项目（xhqing / copybridge / diff-view / ark-key-pool / macmini-tmux）的 `.pi` 软链接已换成真实目录 + `.pi/settings.json`（改动各自记在子仓库 CHANGELOG）。
+  3. 本机与 macmini 镜像自动同步（`~/Developer` 逐字节同步）。
+- **全局侧（不在本仓记）**：`~/.pi/agent/CLAUDE.md`（智能体专属文件条重写 + `.pi/` 白名单补 `APPEND_SYSTEM.md` / `SYSTEM.md`）、`docs/agents-registry.md`、`docs/new-agent-scaffold.md`、`extensions/pi-dir-guard.ts` 四处改动与镜像同步，记在 CapabilityManagerAgent 的 CHANGELOG。
+- **其余 15 个子项目**：分属 Atlas / Mark / Anvil / Victor / Gatsby / Ada，已由本会话逐个委派给负责 Agent 自行改造提交（不越界动别人的仓库）。
+- **验证**：`xhqing` 子项目改造后实跑 `pi --approve -p`，技能（termux-ssh / language-partner）与项目级扩展（input-llm-dump，落盘到子项目 `tmp/`）均从本项目 `.pi` 加载成功。
+
 ### 新增（子项目 macmini-tmux：在 Mac mini 上方便使用 tmux 的 CLI 封装）
 
 - **为什么改**：2026-10-29 用户需求——旧的 `macmini tmux` 不带参数时固定进 `work` 会话，用户希望「不指定名字时每次开一个新会话、名字自动递增」（`session#1`、`session#2` …），改完脚本后又要求把这份代码独立成一个由 Kit 负责的子项目 `macmini-tmux`。顺带查明并修掉一个显示问题：tmux 默认 `status-left-length` 为 10，会话名 `session#1` 连方括号共 12 字符被截断，状态栏看起来像 `session#10`（那个 `0` 其实是窗口序号）。
