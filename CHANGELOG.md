@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 变更（子项目改名：copybridge → vscode-copy-anywhere）
+
+- **为什么改**：用户 2026-10-29 指出「名字不太好，时间久了我从名字看不出这个项目是做什么的」——`copybridge` 的 `bridge` 是隐喻，且未交代「VSCode」「文件」两个关键信息。新名 `vscode-copy-anywhere` 把场景（VSCode）+ 动作（复制）+ 效果（任意处粘贴）都写进名字。
+- **改了什么**：① 本项目 `CLAUDE.md`（`AGENTS.md` 软链接指向它）「子项目清单」节该条改为 `vscode-copy-anywhere`（新路径、新仓库地址、新增「2026-10-30 由 copybridge 改名」记录）；② 全局 `~/.pi/agent/docs/agents-registry.md` 子项目映射行与 `skills/commit/SKILL.md` 举例同步（镜像与 CHANGELOG 记在 CapabilityManagerAgent）；③ 项目自身的目录 / 仓库 / 二进制 / LaunchAgent label / 脚本 / 中英 README / logo / 徽章路径改动，记在该仓库自己的 CHANGELOG；④ 名册（`xhqing` 中英 README）、流量采集列表与流量数据文件名同步。
+
 ### 变更（子项目 `.pi` 由软链接改为真实目录 + 资源引用：全局规矩 2026-10-30 修订，本批落本项目与 5 个子项目）
 
 - **为什么改**：用户 2026-10-30 提问「子项目的 `.pi` / `AGENTS.md` 与负责它的智能体保持一致好，还是做超集好（上一版曾是超集）」，并指出最近又碰到「子项目需要独有的配置要放进 `.pi`」。核查后确认根因：`.pi` **整目录软链接**把「共享」和「独占」压在了同一个符号上——子项目要放自己的配置时无处安放，硬写进 `.pi` 等于直接写进 Agent 项目，会瞬间影响全部兄弟子项目并进入 Agent 仓库的 git 历史；而 pi 的上下文文件（`AGENTS.md`）**没有 include / 导入机制**，超集只能靠复制、复制必然漂移。于是定为**分层**：身份层保持一致（软链接），能力层做超集但用「引用 + 追加」实现。
