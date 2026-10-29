@@ -9,6 +9,7 @@
 - **为什么改**：2026-10-29 用户需求——旧的 `macmini tmux` 不带参数时固定进 `work` 会话，用户希望「不指定名字时每次开一个新会话、名字自动递增」（`session#1`、`session#2` …），改完脚本后又要求把这份代码独立成一个由 Kit 负责的子项目 `macmini-tmux`。顺带查明并修掉一个显示问题：tmux 默认 `status-left-length` 为 10，会话名 `session#1` 连方括号共 12 字符被截断，状态栏看起来像 `session#10`（那个 `0` 其实是窗口序号）。
 - **改了什么**：① 本项目 `CLAUDE.md`（`AGENTS.md` 软链接指向它）「子项目清单」新增 macmini-tmux 一行（用途、建立日期、`install.sh` 复制部署方式、两条软链接）；② 全局 `~/.pi/agent/docs/agents-registry.md`「子项目映射」表新增对应行（镜像同步见 CapabilityManagerAgent CHANGELOG）；③ 新项目本体（脚本、`install.sh`、中英双语 README、logo、`VERSION` 0.1.0、CHANGELOG、LICENSE）见该仓库自己的 CHANGELOG；④ 本机与 macmini 各新建 `~/.tmux.conf`，写入 `set -g status-left-length 40` 修状态栏截断。
 - **名册**：registry 的改动已同批登记 `~/.pi/agent/patch/roster-sync/allowlist.json` 豁免——项目刚在本地建立、尚无 GitHub 远程仓库，公开/私有与描述语均待用户决定；定了远程再把公开条目补进 `xhqing` 的 README / README_cn 名册。
+- **后续（同日）**：项目已开源到 github.com/xhqing/macmini-tmux（v0.1.0），`xhqing` 中英名册已同批补上，`allowlist.json` 里的豁免已删除。
 
 ## [1.1.5] - 2026-10-26
 
