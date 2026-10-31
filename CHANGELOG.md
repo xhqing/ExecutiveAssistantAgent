@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 变更（dotfiles 已建私有远程）
+
+- **为什么改**：用户 2026-10-31 授权「建立 private remote repo 并推送」，防丢的最后一块补齐。
+- **改了什么**：`dotfiles` 已推送到私有仓库 <https://github.com/xhqing/dotfiles>；`CLAUDE.md` 子项目清单里该条由「本机 git 仓库、暂未建远程」改为「私有远程 github.com/xhqing/dotfiles」；全局 `agents-registry.md` 同描述同步（镜像由 CapabilityManagerAgent 维护）。
+
 ### 变更（名册同步规则：实时同步、不再逐次询问）
 
 - **为什么改**：用户 2026-10-31 明确「xhqing公开名册必须实时同步全局注册表，这个不用问，下次自动同步。」原来的两条旧规矩（「描述语先问用户」「私有仓库默认放空不写」）会让每次新增仓库都卡在征询上，与这条指示冲突。
