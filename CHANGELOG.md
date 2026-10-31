@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（NewsScoreStudy 从名册与全局映射表同时移除）
+
+- **为什么改**：用户 2026-10-31 指出上一版处理错了方向——「不在名册里面你还提示我干嘛，我说的 xhqing 里面的名册和全局规则里面的名册内容同步」。也就是说：名册与 `agents-registry.md` 的子项目映射表必须**内容一致**，不能出现「名册没有、规则表里还挂着」的状态。
+- **改了什么**：① 全局 `agents-registry.md` 删除 `QuantStrategistAgent（Mark） | NewsScoreStudy` 与 `DayTradingAgent（Victor） | NewsScoreStudy` 两行登记，改在「已移出名册的子项目」备注里记一笔（仓库本体与私有远程仍在，恢复时两处同时加回）；② `allowlist.json` 清空（不再有豁免需求）；③ 本文件「名册同步职责」的例外条款改为「目前没有例外」。`xhqing` 名册本来就没有这一行，无需改动。
+- **验证**：`roster-sync-check.py` 两份 README 均「✅ 名册与 registry 一致」，无任何豁免。
+
 ### 变更（NewsScoreStudy 从公开名册移除）
 
 - **为什么改**：用户 2026-10-31 指示「NewsScoreStudy 这个项目先从名册中移除」。该仓库属 Mark（QuantStrategistAgent）的子项目，原状态是靠 roster-sync 豁免压着不写进名册（2026-10-26 的理由是「描述语待确认」），这次把口径改成明确的「用户要求先移除」。
