@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 新增（子项目 dotfiles）
+
+- **为什么加**：用户 2026-10-31 决定把「值得带走的 App 配置」集中到一个仓库托管，换设备时一键恢复；该项目归 Kit 负责。
+- **改了什么**：① 本节新增 dotfiles 条目（路径 `~/Developer/dotfiles`、做法、共用文件须注明的规矩）；② 全局 `agents-registry.md` 的子项目映射表同批加行。项目自身的结构、脚本、README 见该仓库自己的 CHANGELOG。
+
 ### 变更（子项目改名：copybridge → vscode-copy-anywhere）
 
 - **为什么改**：用户 2026-10-29 指出「名字不太好，时间久了我从名字看不出这个项目是做什么的」——`copybridge` 的 `bridge` 是隐喻，且未交代「VSCode」「文件」两个关键信息。新名 `vscode-copy-anywhere` 把场景（VSCode）+ 动作（复制）+ 效果（任意处粘贴）都写进名字。
