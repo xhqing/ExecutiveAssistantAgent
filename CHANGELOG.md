@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（Tinker / PatchClaudeAgent 除名）
+
+- **为什么改**：用户 2026-10-31 指示「Tinker 这个 Agent 也除名，不需要了」。
+- **改了什么**：全局 `agents-registry.md` 删除 Tinker 注册行、三小组描述去掉「Tinker 给 CC 打补丁」、退役备注新增「已除名的 Agent（第二批：Tinker）」；`xhqing` 中英名册删除 PatchClaudeAgent 整行、小组描述去掉 Tinker。
+- **未做的**：用户没指定接替者，故不并入任何人的职责；`~/Developer/PatchClaudeAgent` 与 GitHub 仓库保留为存档、未删除。
+
 ### 变更（接管电脑管家职责；名册宿主机列改为 macmini&macbook）
 
 - **为什么改**：用户 2026-10-31 两条指示：① 「电脑管家这个智能体可以从名册中除名了，以后他的工作由你 Kit 处理」；② 「xhqing/README 中的那个表中的宿主机字段现在需要改成 macmini&macbook」。
