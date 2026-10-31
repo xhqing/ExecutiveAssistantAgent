@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+### 变更（子项目 diff-view 注销，功能停用）
+
+- **为什么改**：用户 2026-10-31 决定「diff-view 功能可以注销掉，需要的时候关闭 auto-add 或 auto-commit 就行」——暂停自动提交后改动保留在工作区，直接 `git diff` / `git diff --cached` 即可，不再需要专门的快照工具。
+- **改了什么**：① 卸载 pi 侧扩展 `~/.pi/agent/extensions/diff-view.ts` 与 VSCode 侧扩展 `xhqing.diff-view-vsce`（含残留目录与缓存清理）；② 清理 `~/.pi/agent/state/ai-edit-diff` 快照目录（约 925MB）；③ 全局 `agents-registry.md` 子项目映射表删除 diff-view 行；④ 本文件「子项目清单」删除 diff-view 条目、新增「已注销」记录；⑤ `xhqing` 中英名册同步删除 diff-view 条目（roster-sync 校验通过）；⑥ 项目 `~/Developer/diff-view` 的 README 顶部加注销说明（中英双语）、CHANGELOG 记注销条目。
+- **保留**：本地项目目录与 GitHub 仓库 `xhqing/diff-view` 原样保留作存档，不 archive、不删除。
+- **能力差异（如实记录）**：暂停自动提交后看到的是 `git diff` 的累计改动（相对暂存区或 HEAD）；原工具能逐步回看每次 AI 编辑的前后快照，需要逐步历史时用 `git log -p` 或分段提交。
+
 ### 变更（除名 agent 的本地目录一律删除）
 
 - **为什么改**：用户 2026-10-31 指示「除名的智能体项目本身不需要存在于本地了，也不需要在本地备份，只要 gh 上面是最新版的就可以了」。
