@@ -41,7 +41,7 @@
 
 - **描述语不用再问用户，直接写（2026-10-31 修订）**：名册是 registry 的公开镜像，registry 改了什么名册就同批改成什么，**不用征询、不用等确认**。描述语由我按仓库实际情况直接撰写：一句话说清「它是什么 / 解决什么问题」，不夸大、不写与仓库无关的内容、不泄露个人信息与凭证。
   - 用户原话（2026-10-31）：「xhqing公开名册必须实时同步全局注册表，这个不用问，下次自动同步。」因此**私有仓库也照常列进名册**，不再默认豁免（旧规矩「私有仓库默认放空不写」作废）。
-  - **例外**：用户对某个**具体仓库**有过专项指示的，从其指示——目前只有 `NewsScoreStudy`（用户 2026-10-26 说描述语待确认，暂缓写入，留在 `~/.pi/agent/patch/roster-sync/allowlist.json` 豁免里；用户发话后立即补齐并删豁免）。
+  - **例外**：用户对某个**具体仓库**有过专项指示的，从其指示——目前只有 `NewsScoreStudy`（用户 2026-10-31 明确要求先从名册移除——它是 Mark 的子项目，公开名册暂不列出，豁免留在 `~/.pi/agent/patch/roster-sync/allowlist.json`；用户发话后再加回并删豁免）。
 - **Host machine 列手工同步**：脚本只比名字集合，不查 Host 列——registry 的宿主机归属变了（如 2026-10-26 Mark 从 macmini 迁回本机），README 里对应 Agent 的 Host 列要手工改。
 - **工具强制**：pi 端扩展 `~/.pi/agent/extensions/roster-sync-guard.ts`——写到 registry 后立即比对并当场插话；每轮收尾（`agent_settled`）在 Kit 会话里再兜底提醒一次。规则原文见全局 `~/.pi/agent/docs/agents-registry.md`「名册同步」节。
 

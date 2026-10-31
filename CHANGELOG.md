@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+### 变更（NewsScoreStudy 从公开名册移除）
+
+- **为什么改**：用户 2026-10-31 指示「NewsScoreStudy 这个项目先从名册中移除」。该仓库属 Mark（QuantStrategistAgent）的子项目，原状态是靠 roster-sync 豁免压着不写进名册（2026-10-26 的理由是「描述语待确认」），这次把口径改成明确的「用户要求先移除」。
+- **改了什么**：① `allowlist.json` 里该条的豁免理由改写为「用户 2026-10-31 要求先从名册移除」；② 全局 `agents-registry.md` 的 NewsScoreStudy 行加「**不列入公开名册**」标注（避免以后有人误加），本文件例外条款同步；③ `xhqing` 中英名册本来就没有这一行（0 处），无需改动。用户发话后再加回并按新规矩自动维护。
+
 ### 变更（dotfiles 已建私有远程）
 
 - **为什么改**：用户 2026-10-31 授权「建立 private remote repo 并推送」，防丢的最后一块补齐。
