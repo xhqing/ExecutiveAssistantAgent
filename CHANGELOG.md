@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（Mac mini 订阅中转服务下线，能力转为按需运行）
+
+- **为什么改**：用户判断「域名不会变，这个服务大概率用不到，等真要用时已经忘了还有它」——常驻无人使用的服务是负资产，且这套能力的真实价值是「一次性把订阅里的 IP 改成域名」，不是持续同步（UUID 为账号级不变、VLESS 端口固定 443、节点域名稳定，IP 变化已由域名自动跟随）。
+- **改了什么**：① Mac mini 上卸载 launchd 服务 `net.xhq.subsync`、删除 plist、运行副本 `~/.local/lib/subsync/` 与含令牌密钥的配置 `~/.config/subsync/`，8787 端口释放、无进程残留（逐项复核通过）；② 源码与文档保留在 `~/.pi/agent/patch/subsync/`（已由 Prometheus 同步进 CapabilityManagerAgent 开源镜像并发版 v1.10.0）；③ 新增 `MEMO.md` 记 M1，写明触发条件（换机场 / 需重导订阅时）与两种用法。
+- **保留的能力**：需要时本地跑 `subsync.py` 或临时 `install.sh` 部署，用完即卸；不需要任何常驻进程。
+
 ### 变更（子项目 diff-view 注销，功能停用）
 
 - **为什么改**：用户 2026-10-31 决定「diff-view 功能可以注销掉，需要的时候关闭 auto-add 或 auto-commit 就行」——暂停自动提交后改动保留在工作区，直接 `git diff` / `git diff --cached` 即可，不再需要专门的快照工具。
