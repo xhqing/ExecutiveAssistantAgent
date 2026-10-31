@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+### 变更（接管电脑管家职责；名册宿主机列改为 macmini&macbook）
+
+- **为什么改**：用户 2026-10-31 两条指示：① 「电脑管家这个智能体可以从名册中除名了，以后他的工作由你 Kit 处理」；② 「xhqing/README 中的那个表中的宿主机字段现在需要改成 macmini&macbook」。
+- **改了什么**：
+  - `CLAUDE.md`「你是谁」补记：2026-10-31 起接管原电脑管家（Alfred / DeviceStewardAgent）的职责——本地电脑 / 远程服务器 / 云电脑的资源监控与管理建议。
+  - 全局 `agents-registry.md`：智能体注册表删除 Alfred 行、Kit 行补记账管职责、三小组描述删去 Alfred、退役备注新增「已除名的 Agent（Alfred）」；「宿主机归属」段修订为「两机全量镜像，名册 Host 列统一写 macmini&macbook，单机原则的实际含义是活跃写操作只在一台机器做」。
+  - `xhqing` 中英名册：删除 DeviceStewardAgent 整行、小组描述删去 Alfred、Host machine 列 20 处 `MacBook Air` 统一改为 `macmini&amp;macbook`。
+- **验证**：`roster-sync-check.py` 应显示两份 README 与 registry 一致；`DeviceStewardAgent` 项目目录与 GitHub 仓库保留为存档、未删除。
+
 ### 变更（NewsScoreStudy 从名册与全局映射表同时移除）
 
 - **为什么改**：用户 2026-10-31 指出上一版处理错了方向——「不在名册里面你还提示我干嘛，我说的 xhqing 里面的名册和全局规则里面的名册内容同步」。也就是说：名册与 `agents-registry.md` 的子项目映射表必须**内容一致**，不能出现「名册没有、规则表里还挂着」的状态。
