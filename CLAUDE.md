@@ -32,14 +32,16 @@
 
 本项目负责的子项目如下（与全局 `~/.pi/agent/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-30 用户修订的规则：智能体专属文件的实体只在 Agent 项目；子项目根目录挂 `AGENTS.md` 软链接（身份与本项目一致）+ 真实 `.pi/` 目录（内含 `settings.json`，用路径引用本项目的 skills / extensions / prompts / themes，并对子项目本地目录做追加）——在子项目目录开会话即继承 Kit 的身份与能力（Agent 进驻子项目），且子项目自己的配置写在自己的 `.pi/` 里、不会污染本项目；后台开启 pi 会话仍只能以本 Agent 项目根目录为工作目录**（细则见全局 `~/.pi/agent/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节）。子项目的工作在本项目会话里按路径跨目录操作。
 
-### 名册同步职责（2026-10-26 用户立，硬性规定 + 工具强制）
+### 名册同步职责（2026-10-26 用户立、2026-10-31 修订，硬性规定 + 工具强制）
 
 `xhqing` 主页 README 里那张团队名册表格（「Subprojects (🌐 public · 🔒 private)」）是**本项目负责维护的对外名册**，它的权威来源是全局 `~/.pi/agent/docs/agents-registry.md` 的两张表（智能体命名注册表 + 子项目映射）。两条职责：
 
 1. **别人改了 registry，本会话同批补齐**：任何 agent（含我自己）改动 registry——新增 / 删除 Agent 项目、子项目新增 / 删除 / 归属变更、Agent 迁机——都必须在**同一批改动里**把 `xhqing` 的英文 `README.md` 与中文 `README_cn.md` 两份名册改齐（双语文档同步，内容语义对齐），不留到「下次顺手改」。改动 registry 的那个会话有责任补齐或当场交给本会话处理。
 2. **我自己发现的漂移，立刻查补**：每轮收尾前顺手跑一次 `python3 ~/.pi/agent/patch/roster-sync/roster-sync-check.py`，缺的（registry 有、README 无）与多的（README 有、registry 无）都补/删；补完走本项目 `/add` → `/commit` → 推送。
 
-- **公开描述语先问用户**：某仓库（尤其私有仓库）在公开 README 上怎么写、用哪些词，要先取得用户认可；没认可的就不写，先进 `~/.pi/agent/patch/roster-sync/allowlist.json` 登记豁免（repo + 理由 + 日期），用户确认后再写进 README 并把豁免删掉。
+- **描述语不用再问用户，直接写（2026-10-31 修订）**：名册是 registry 的公开镜像，registry 改了什么名册就同批改成什么，**不用征询、不用等确认**。描述语由我按仓库实际情况直接撰写：一句话说清「它是什么 / 解决什么问题」，不夸大、不写与仓库无关的内容、不泄露个人信息与凭证。
+  - 用户原话（2026-10-31）：「xhqing公开名册必须实时同步全局注册表，这个不用问，下次自动同步。」因此**私有仓库也照常列进名册**，不再默认豁免（旧规矩「私有仓库默认放空不写」作废）。
+  - **例外**：用户对某个**具体仓库**有过专项指示的，从其指示——目前只有 `NewsScoreStudy`（用户 2026-10-26 说描述语待确认，暂缓写入，留在 `~/.pi/agent/patch/roster-sync/allowlist.json` 豁免里；用户发话后立即补齐并删豁免）。
 - **Host machine 列手工同步**：脚本只比名字集合，不查 Host 列——registry 的宿主机归属变了（如 2026-10-26 Mark 从 macmini 迁回本机），README 里对应 Agent 的 Host 列要手工改。
 - **工具强制**：pi 端扩展 `~/.pi/agent/extensions/roster-sync-guard.ts`——写到 registry 后立即比对并当场插话；每轮收尾（`agent_settled`）在 Kit 会话里再兜底提醒一次。规则原文见全局 `~/.pi/agent/docs/agents-registry.md`「名册同步」节。
 
