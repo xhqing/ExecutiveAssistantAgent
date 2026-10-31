@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（除名 agent 的本地目录一律删除）
+
+- **为什么改**：用户 2026-10-31 指示「除名的智能体项目本身不需要存在于本地了，也不需要在本地备份，只要 gh 上面是最新版的就可以了」。
+- **改了什么**：① 删除 `~/Developer/DeviceStewardAgent`（1.3M）与 `~/Developer/PatchClaudeAgent`（71M）两个本地目录——删除前已确认两者工作区干净、与 `origin/main` 同步（0/0）、无 launchd / crontab / 全局配置引用；② 全局 `agents-registry.md` 的两条除名备注改为「本地目录已删除、GitHub 仓库保留最新版为唯一源」，并新增一条通则「除名 agent 的本地副本一律删除、不在本地保留备份」；③ GitHub 仓库 `xhqing/DeviceStewardAgent`、`xhqing/PatchClaudeAgent` 均保留、为最新版（最后推送 2026-10-17）。
+- **注意**：`~/Developer` 与 macmini 双向镜像，本机删除会同步删除 macmini 上的副本（符合用户「不需要本地备份」的口径）。
+
 ### 变更（Tinker / PatchClaudeAgent 除名）
 
 - **为什么改**：用户 2026-10-31 指示「Tinker 这个 Agent 也除名，不需要了」。
