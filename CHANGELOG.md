@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### 变更（子项目清单新增 TeamToolkit）
+
+- **为什么改**：用户 2026-11-05 决定把原 CapabilityManagerAgent（智能体 Prometheus）降级为普通项目并更名 **TeamToolkit**，归本项目（Kit）负责；全局注册表的智能体表已移除 Prometheus、子项目映射表已把 TeamToolkit 挂在 ExecutiveAssistantAgent 名下（团队 agent 数 21 → 17）。本项目的「子项目清单」必须与注册表保持一致，否则会话里子项目边界就错了。
+- **改了什么**：`AGENTS.md` 的「子项目清单」新增 TeamToolkit 一条，写清它是什么（全局 `~/.pi/agent` 的逐字节开源镜像）、维护三条纪律（不在镜像里改内容；发布是 macmini 单 pusher；本机不保留仓库副本）与引用位置（`docs/capability-sync.md`）。
+- **回归检查**：只新增一条、不动已有条目；TeamToolkit 不承载 agent 会话（无身份文件需求），不受「后台唤醒只能以 Agent 项目根目录为 cwd」的限制。
+
 ### 变更（移除访问量徽章，配合停用集中式流量采集）
 
 - **为什么改**：用户 2026-11-04 决定停用 xhqing 仓库的集中式访问量采集，同时不再在各仓库 README 展示访问量徽章。徽章的数据源必须由采集任务每天刷新，采集停掉之后徽章会冻结在旧值，而徽章文案写的是「Visits/day (14d)」——数字不再更新却仍显示成实时数据，留着反而误导读者。
