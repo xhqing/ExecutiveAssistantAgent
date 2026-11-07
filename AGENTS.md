@@ -32,7 +32,9 @@
 
 ## 子项目清单
 
-本项目负责的子项目如下（与全局 `~/.pi/agent/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-30 用户修订的规则：智能体专属文件的实体只在 Agent 项目；子项目根目录挂 `AGENTS.md` 软链接（身份与本项目一致）+ 真实 `.pi/` 目录（内含 `settings.json`，用路径引用本项目的 skills / extensions / prompts / themes，并对子项目本地目录做追加）——在子项目目录开会话即继承 Kit 的身份与能力（Agent 进驻子项目），且子项目自己的配置写在自己的 `.pi/` 里、不会污染本项目；后台开启 pi 会话仍只能以本 Agent 项目根目录为工作目录**（细则见全局 `~/.pi/agent/docs/agents-registry.md`「智能体专属文件归属与子项目映射」节）。子项目的工作在本项目会话里按路径跨目录操作。
+本项目负责的子项目如下（与全局 `~/.pi/agent/docs/agents-registry.md` 的「子项目映射」表保持一致）。**按 2026-10-30 用户修订的规则：智能体专属文件的实体只在 Agent 项目；子项目根目录挂 `AGENTS.md` 软链接（身份与本项目一致）+ 真实 `.pi/` 目录（内含 `settings.json`，用路径引用本项目的 skills / extensions / prompts / themes，并对子项目本地目录做追加）——在子项目目录开会话即继承 Kit 的身份与能力（Agent 进驻子项目），且子项目自己的配置写在自己的 `.pi/` 里、不会污染本项目。**
+
+**Leader / Worker 分工（2026-11-07 全局规则）**：本项目根目录起的会话是 **Leader**（只做 local main 同步、建 worktree、派任务、收尾）；子项目根 / 子项目 worktree 起的会话是 **Worker**（干具体活并向 Leader 汇报）。`agent_call` / `agent_wake` 的 `dir` 允许 Agent 项目根 / 已登记子项目根 / 子项目的 git worktree 三类，启动带 `-a`。子项目专属硬规则写进各自的 `.pi/APPEND_SYSTEM.md`。详见全局 `~/.pi/agent/AGENTS.md`「Leader / Worker 分工」与 `~/.pi/agent/docs/agents-registry.md` 第 4 条。
 
 ### 名册同步职责（2026-10-26 用户立、2026-10-31 修订，硬性规定 + 工具强制）
 
