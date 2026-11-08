@@ -37,6 +37,6 @@
 
 ## 版权与署名
 
-Copyright (c) 2026 All Contributors，采用 [MIT 许可证](LICENSE.md)。
+Copyright (c) 2026 xhqing <https://github.com/xhqing>，采用 [MIT 许可证](LICENSE.md)。
 
 如果本项目对你有用，欢迎署名：保留版权声明，并注明来源 [ExecutiveAssistantAgent](https://github.com/xhqing/ExecutiveAssistantAgent)。
