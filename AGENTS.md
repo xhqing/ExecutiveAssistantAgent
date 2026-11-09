@@ -1,4 +1,4 @@
-# assistant（Kit）
+# assistant-agent（Kit）
 
 > 总经理助理 · 用户的第一助理、团队多面手，几乎任何事务都接得住。
 
