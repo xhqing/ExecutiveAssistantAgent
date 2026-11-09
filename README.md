@@ -8,7 +8,7 @@
 
 </div>
 
-# assistant · Kit
+# assistant-agent · Kit
 
 > **Kit** — The owner's executive assistant. Direct report to the owner, not part of any squad: the team's generalist — picks up and handles almost anything. Persona: a mature professional woman — a pocket Swiss Army knife.
 
@@ -37,4 +37,4 @@ General working discipline: read before touching files, prefer adding and editin
 
 Copyright (c) 2026 xhqing and contributors. Licensed under the [MIT License](LICENSE.md).
 
-If this project is useful to you, attribution is appreciated: preserve the copyright notice and link back to [assistant](https://github.com/xhqing/assistant).
+If this project is useful to you, attribution is appreciated: preserve the copyright notice and link back to [assistant-agent](https://github.com/xhqing/assistant-agent).

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-本文件记录本项目（assistant / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
+本文件记录本项目（assistant-agent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
 ### 变更（本项目与子项目的 `AGENTS.md`、`.pi/` 改为完全独立，2026-11-08）
 
@@ -11,10 +11,10 @@
 
 ## [Unreleased]
 
-### 变更（项目更名为 assistant，2026-11-09）
+### 变更（项目更名为 assistant-agent，2026-11-09）
 
-- **为什么改**：用户 2026-11-09 决定把本项目名（本地目录 / GitHub 仓库）由 `ExecutiveAssistantAgent` 改为 **`assistant`**——项目名只需「尽可能简单且能体现主要职责」，不必以 `Agent` 结尾；团队规则同步改为「**项目是不是 Agent 项目，看 `README.md` 的 `Type` 徽章是不是 `AI Agent`，与项目名无关**」。本项目性质不变（仍是 Kit 的 Agent 项目，`Type-AI Agent` 徽章保留）。
-- **改了什么**：① 本地目录与 GitHub 仓库更名为 `assistant`（旧 URL 由 GitHub 自动重定向）；② `README.md` / `README_cn.md` 标题与版权署名链接、`AGENTS.md` 标题同步更新；③ 全局能力层同批对齐：`docs/agents-registry.md`（新建「Agent 项目的判定标准」节 + Kit 行项目名 + 子项目映射表六行 + 命名规则改口）、`docs/new-agent-scaffold.md`、`docs/repo-branch-protection.md`、`docs/capability-sync.md`、`skills/commit/SKILL.md`（项目类型推断与 9d 触发条件）、`extensions/agent-call.ts`（注册表解析改为读「名称 / 项目」两列，不再依赖 `Agent` 后缀）、`extensions/roster-sync-guard.ts`（Kit 目录）、`patch/roster-sync/roster-sync-check.py`（子项目映射解析 + Agent 项目徽章校验）、`patch/settle-repo-check/settle-repo-check.py`（表头判定）、`patch/private-links/manifest.tsv`；④ `xhqing` 主页名册双语同步、其余子项目里「归 ExecutiveAssistantAgent 负责」的当前事实引用同步改名。
+- **为什么改**：用户 2026-11-09 决定把本项目名（本地目录 / GitHub 仓库）由 `ExecutiveAssistantAgent` 改为 **`assistant-agent`**——按用户 2026-11-09 正式规定：**agent 项目名一律 `<职责>-agent`（全小写、连字符）**；团队规则同步改为「**项目是不是 Agent 项目，看 `README.md` 的 `Type` 徽章是不是 `AI Agent`，与项目名无关**」。本项目性质不变（仍是 Kit 的 Agent 项目，`Type-AI Agent` 徽章保留）。
+- **改了什么**：① 本地目录与 GitHub 仓库更名为 `assistant-agent`（旧 URL 由 GitHub 自动重定向）；② `README.md` / `README_cn.md` 标题与版权署名链接、`AGENTS.md` 标题同步更新；③ 全局能力层同批对齐：`docs/agents-registry.md`（新建「Agent 项目的判定标准」节 + Kit 行项目名 + 子项目映射表六行 + 命名规则改为「`<职责>-agent` 全小写」）、`docs/new-agent-scaffold.md`、`docs/repo-branch-protection.md`、`docs/capability-sync.md`、`skills/commit/SKILL.md`（项目类型推断与 9d 触发条件）、`extensions/agent-call.ts`（注册表解析改为读「名称 / 项目」两列，不再依赖 `Agent` 后缀）、`extensions/roster-sync-guard.ts`（Kit 目录）、`patch/roster-sync/roster-sync-check.py`（子项目映射解析 + Agent 项目徽章校验）、`patch/settle-repo-check/settle-repo-check.py`（表头判定）、`patch/private-links/manifest.tsv`；④ `xhqing` 主页名册双语同步、其余子项目里「归 ExecutiveAssistantAgent 负责」的当前事实引用同步改名。
 - **回归检查**：纯改名，职责与运行行为不变；`agent_call` / `agent_wake` 的目录校验现在读注册表的项目列，改名后仍能正确识别 Leader 目录；「子项目映射」表头去掉「（拟人名）」后，settle-repo-check 改为按「Agent 项目 + 子项目」列名识别表头。
 
 ### 变更（项目规则文件本体统一改为 `AGENTS.md`，`CLAUDE.md` 弃用，2026-11-05）
