@@ -8,7 +8,7 @@
 
 </div>
 
-# ExecutiveAssistantAgent · Kit
+# assistant · Kit
 
 > **Kit（总经理助理）** — 用户的第一助理，直属用户、不属任何小组：团队多面手，几乎任何事务都接得住、处理得了。人设是一位**成熟职业女性**：干练、周到，一把随身瑞士军刀。
 
@@ -39,4 +39,4 @@
 
 Copyright (c) 2026 xhqing and contributors，采用 [MIT 许可证](LICENSE.md)。
 
-如果本项目对你有用，欢迎署名：保留版权声明，并注明来源 [ExecutiveAssistantAgent](https://github.com/xhqing/ExecutiveAssistantAgent)。
+如果本项目对你有用，欢迎署名：保留版权声明，并注明来源 [assistant](https://github.com/xhqing/assistant)。
