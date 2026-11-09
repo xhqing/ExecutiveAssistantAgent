@@ -35,6 +35,6 @@ General working discipline: read before touching files, prefer adding and editin
 
 ## License & Attribution
 
-Copyright (c) 2026 xhqing <https://github.com/xhqing>. Licensed under the [MIT License](LICENSE.md).
+Copyright (c) 2026 xhqing and contributors. Licensed under the [MIT License](LICENSE.md).
 
 If this project is useful to you, attribution is appreciated: preserve the copyright notice and link back to [ExecutiveAssistantAgent](https://github.com/xhqing/ExecutiveAssistantAgent).
