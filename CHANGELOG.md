@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### 变更（引用同步：Hopkins 项目更名为 apply-agent，2026-11-09）
+
+- **为什么改**：Hopkins 的 Agent 项目 2026-11-09 按新命名规定（agent 项目名一律 `<职责>-agent`、全小写）由 `ApplyOptimizerAgent` 更名为 `apply-agent`。本项目 `AGENTS.md` / `README.md` / `README_cn.md` 里指代该项目的名字要同步，否则指错对象。
+- **改了什么**：上述三份文件里的 `ApplyOptimizerAgent` → `apply-agent`（职责描述与分工关系不变）。
+
 本文件记录本项目（assistant-agent / Kit）每次文件增删改查的变更，写清「为什么改」和「改了什么」。版本号以项目根 `VERSION` 文件为唯一权威（顶部条目版本号须与 `VERSION` 一致——release skill 的就绪判据；`[Unreleased]` 位于顶部表示有新内容待发版）。
 
 ### 变更（本项目与子项目的 `AGENTS.md`、`.pi/` 改为完全独立，2026-11-08）
