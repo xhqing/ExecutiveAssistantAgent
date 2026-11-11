@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 变更（子项目名称同步：TeamToolkit 更名为 agents-infra，2026-11-11）
+
+- **为什么改**：用户 2026-11-11 决定把名下的 TeamToolkit 更名为 agents-infra——原名字读起来像某个 agent 的专属工具箱，看不出它是全队 17 个 agent 共用的基础设施。本项目 `AGENTS.md` 的子项目清单必须同批改名，否则指向一个已经不用的名字。
+- **改了什么**：`AGENTS.md` 子项目清单里的 **TeamToolkit** 条目整条换成 **agents-infra**——仓库地址改为 `github.com/xhqing/agents-infra`、补三段名字的沿革（CapabilityManagerAgent → TeamToolkit → agents-infra）、发布脚本路径改为 `patch/agents-infra-publish/publish.py`、版本号更新为 v2.1.0。
+- **回归风险**：无——只改名字与指针，职责与维护口径不变；旧 URL 由 GitHub 自动重定向，`~/.pi/agent` 里的同名工具目录已同批改名。
+
 ### 变更（引用同步：Hopkins 项目更名为 apply-agent，2026-11-09）
 
 - **为什么改**：Hopkins 的 Agent 项目 2026-11-09 按新命名规定（agent 项目名一律 `<职责>-agent`、全小写）由 `ApplyOptimizerAgent` 更名为 `apply-agent`。本项目 `AGENTS.md` / `README.md` / `README_cn.md` 里指代该项目的名字要同步，否则指错对象。
