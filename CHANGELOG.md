@@ -16,6 +16,13 @@
 
 ## [Unreleased]
 
+### 变更（子项目 blog 移交 social-agent，2026-11-11）
+
+- **为什么改**：2026-11-11 用户把个人博客 `xhqing/blog`（藏经阁）从本项目移交 social-agent（Gatsby）作为其子项目。本项目的「子项目清单」若仍把 blog 记在「已取消、不再维护」里，会让人误以为它已停用——而它现在是活跃子项目，且已接上从 social-agent 的 `docs/articles/` 每 10 分钟自动同步的发布链路。
+- **改了什么**：`AGENTS.md` 的「子项目清单」节把 blog 从「已取消」一条里移出，改列入「已移交（转由 Gatsby 负责）」并写清它的身份、沿革（2026-09-12 接管 → 2026-10-14 一度取消 → 2026-11-11 恢复并移交）与当前自动发布链路；「已取消」一条只留 CyberRipple。
+- **配套（他人已完成，本条不重复操作）**：全局 `~/.pi/agent/docs/agents-registry.md` 的 blog 条目已由 social-agent 移到子项目映射表并挂在 social-agent 名下；本项目的子项目 `xhqing` 主页名册已在 PR #24 里把 social-agent 的子项目列改为 `🌐 blog`。
+- **回归检查**：纯文档。blog 早已不在本项目的自动收尾巡检范围（settle-repo-check 读注册表映射），移交后仍不在；本项目没有任何脚本或配置引用 blog 路径（2026-10-14 本地目录删除后即无引用）。
+
 ### 变更（项目更名为 assistant-agent，2026-11-09）
 
 - **为什么改**：用户 2026-11-09 决定把本项目名（本地目录 / GitHub 仓库）由 `ExecutiveAssistantAgent` 改为 **`assistant-agent`**——按用户 2026-11-09 正式规定：**agent 项目名一律 `<职责>-agent`（全小写、连字符）**；团队规则同步改为「**项目是不是 Agent 项目，看 `README.md` 的 `Type` 徽章是不是 `AI Agent`，与项目名无关**」。本项目性质不变（仍是 Kit 的 Agent 项目，`Type-AI Agent` 徽章保留）。
